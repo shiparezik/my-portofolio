@@ -249,6 +249,7 @@ export default function Home() {
   const [messages, setMessages] = useState<Record<string, any> | null>(null);
   const [isLoadingComplete, setIsLoadingComplete] = useState(false);
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
 
   const { scrollY } = useScroll();
   const navbarOpacity = useTransform(scrollY, [0, 100], [1, 0.92]);
@@ -328,13 +329,13 @@ const t = (key: string) => {
     opacity: scrolledPastHero ? 0 : 1 
   }}
   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-  className="fixed top-0 left-0 right-0 z-50 overflow-hidden border-b border-white/10 
+  className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-white/10 
              bg-black/70 backdrop-blur-[26px] backdrop-saturate-150 
              shadow-[0_18px_80px_-25px_rgb(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(168,85,247,0.2)]
              rounded-br-[3rem] rounded-bl-[3rem]"
 >
   {/* === ТЁМНЫЙ КОСМИЧЕСКИЙ ФОН === */}
-  <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+  <div className="absolute inset-0 z-0 pointer-events-none overflow-visible">
 
     {/* Глубокий космос */}
     <div className="absolute inset-0 opacity-80" style={{
@@ -422,40 +423,40 @@ const t = (key: string) => {
   />
 
 {/* ==================== МОБИЛЬНЫЙ НАВБАР (только для телефона) ==================== */}
-<div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
-  <div className="flex items-center justify-around px-2 py-3">
-    
-    {/* Кнопки навигации */}
-    {[
-      { key: "nav.about", id: "about", icon: User },
-      { key: "nav.skills", id: "skills", icon: Code2 },
-      { key: "nav.projects", id: "projects", icon: Briefcase },
-      { key: "nav.contact", id: "contact", icon: Mail }
-    ].map((item) => (
-      <button
-        key={item.id}
-        onClick={() => scrollToSection(item.id)}
+  <div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
+    <div className="flex items-center justify-around px-2 py-3">
+      
+      {/* Кнопки навигации */}
+      {[
+        { key: "nav.about", id: "about", icon: User },
+        { key: "nav.skills", id: "skills", icon: Code2 },
+        { key: "nav.projects", id: "projects", icon: Briefcase },
+        { key: "nav.contact", id: "contact", icon: Mail }
+      ].map((item) => (
+        <button
+          key={item.id}
+          onClick={() => scrollToSection(item.id)}
+          className="flex flex-col items-center gap-1 text-white/70 active:text-white"
+        >
+          <item.icon size={22} />
+          <span className="text-[10px] tracking-wider">{t(item.key)}</span>
+        </button>
+      ))}
+
+      {/* Кнопка Menu */}
+      <button 
+        onClick={() => setIsMenuOpen(!isMenuOpen)} 
         className="flex flex-col items-center gap-1 text-white/70 active:text-white"
       >
-        <item.icon size={22} />
-        <span className="text-[10px] tracking-wider">{t(item.key)}</span>
+        <div className="space-y-1">
+          <div className="w-5 h-0.5 bg-white" />
+          <div className="w-5 h-0.5 bg-white" />
+          <div className="w-5 h-0.5 bg-white" />
+        </div>
+        <span className="text-[10px]">Menu</span>
       </button>
-    ))}
-
-    {/* Кнопка Menu */}
-    <button 
-      onClick={() => setIsMenuOpen(!isMenuOpen)} 
-      className="flex flex-col items-center gap-1 text-white/70 active:text-white"
-    >
-      <div className="space-y-1">
-        <div className="w-5 h-0.5 bg-white" />
-        <div className="w-5 h-0.5 bg-white" />
-        <div className="w-5 h-0.5 bg-white" />
-      </div>
-      <span className="text-[10px]">Menu</span>
-    </button>
+    </div>
   </div>
-</div>
 
 {/* ==================== МОБИЛЬНОЕ МЕНЮ ==================== */}
 {isMenuOpen && (
@@ -539,17 +540,24 @@ const t = (key: string) => {
         <motion.a href="https://www.linkedin.com/in/danylo-shypotko-85924a33a/" target="_blank" className="p-2 text-white/70 hover:text-white transition-colors" whileHover={{ scale: 1.2, rotate: -15, y: -3 }} whileTap={{ scale: 0.9 }} transition={{ type: "spring", stiffness: 300, damping: 15 }}><LinkedInIcon /></motion.a>
       </div>
 
-      {/* Language Switcher */}
-      <div className="relative group">
-        <motion.button whileHover={{ scale: 1.05 }} className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/20 hover:border-purple-400 text-sm font-medium">
+{/* ==================== LANGUAGE SWITCHER ==================== */}
+      <div className="relative group z-[999]">
+        <motion.button 
+          whileHover={{ scale: 1.05 }} 
+          className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/20 hover:border-purple-400 text-sm font-medium"
+        >
           <span className="text-xl">{languageFlags[currentLang]}</span>
         </motion.button>
-        <div className="absolute right-0 mt-2 w-56 bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl py-2 z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+
+        {/* Выпадающий список — поднят выше всего */}
+        <div className="absolute right-0 mt-2 w-56 bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl py-2 z-[999] 
+                        opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
           {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
             <button
               key={lang}
               onClick={() => changeLanguage(lang)}
-              className={`w-full text-left px-5 py-3 hover:bg-white/10 flex items-center gap-3 ${currentLang === lang ? 'bg-purple-500/10 text-purple-400' : ''}`}
+              className={`w-full text-left px-5 py-3 hover:bg-white/10 flex items-center gap-3 text-sm 
+                ${currentLang === lang ? 'bg-purple-500/10 text-purple-400' : ''}`}
             >
               <span className="text-2xl">{languageFlags[lang]}</span>
               <div>
@@ -560,7 +568,6 @@ const t = (key: string) => {
           ))}
         </div>
       </div>
-
       <motion.button
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.98 }}
@@ -686,7 +693,7 @@ const t = (key: string) => {
 </motion.div>
 
       {/* ==================== HERO ==================== */}
-      <section className="hero relative flex justify-center items-center min-h-screen pt-20 overflow-hidden">
+      <section className="hero relative flex justify-center items-center min-h-screen pt-20 overflow-visible">
         <div className="absolute inset-0 bg-[radial-gradient(#4f46e520_1px,transparent_1px)] [background-size:40px_40px]" />
         <div className="glow glow1 absolute top-[-40%] left-[-20%] w-[800px] h-[800px] bg-purple-500/25 rounded-full blur-[130px]" />
         <div className="glow glow2 absolute bottom-[-30%] right-[-25%] w-[1000px] h-[1000px] bg-pink-500/25 rounded-full blur-[150px]" />
