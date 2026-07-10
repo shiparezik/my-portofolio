@@ -515,10 +515,10 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
 
 {/* ==================== ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ ==================== */}
 {isMenuOpen && (
-  <div className="md:hidden fixed inset-0 z-[95] bg-[#050505] flex flex-col">
+  <div className="md:hidden fixed inset-0 z-[95] bg-black flex flex-col min-h-screen">
     
-    {/* Шапка */}
-    <div className="flex justify-between items-center px-6 pt-12 pb-6 border-b border-white/10">
+    {/* Шапка (увеличил отступ сверху) */}
+    <div className="flex justify-between items-center px-6 pt-14 pb-6 border-b border-white/10">
       <div 
         onClick={() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -537,7 +537,7 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
     </div>
 
     {/* Навигация */}
-    <div className="px-6 py-4 flex-1">
+    <div className="px-6 py-2 flex-1">
       {[
         { key: "nav.about", id: "about", icon: User },
         { key: "nav.skills", id: "skills", icon: Code2 },
@@ -554,6 +554,67 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
         </button>
       ))}
     </div>
+
+    {/* ==================== ВЫБОР ЯЗЫКА + КОНТАКТЫ ==================== */}
+    <div className="px-6 pb-12 pt-6 border-t border-white/10 mt-auto">
+      
+      {/* Выбор языка */}
+      <div className="mb-6">
+        <div className="text-sm text-white/50 mb-3 px-1">Language</div>
+        <div className="grid grid-cols-2 gap-3">
+          {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
+            <button
+              key={lang}
+              onClick={() => {
+                changeLanguage(lang);
+                setIsMenuOpen(false);
+              }}
+              className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all active:scale-[0.985]
+                ${currentLang === lang 
+                  ? 'bg-purple-500/20 border-purple-400 text-purple-300' 
+                  : 'bg-zinc-900 border-white/10 hover:border-white/30'}`}
+            >
+              <span className="text-3xl">{languageFlags[lang]}</span>
+              <div>
+                <div className="font-medium">{languageNames[lang]}</div>
+                <div className="text-xs text-zinc-500">{lang.toUpperCase()}</div>
+              </div>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Кнопка связи */}
+      <button
+        onClick={() => {
+          scrollToSection('contact');
+          setIsMenuOpen(false);
+        }}
+        className="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg mb-4 active:scale-[0.985] transition-all"
+      >
+        Написать мне
+      </button>
+
+      {/* Социальные сети */}
+      <div className="flex justify-center gap-6 text-white/60">
+        <a href="https://github.com/shiparez" target="_blank" className="hover:text-white transition-colors">
+          GitHub
+        </a>
+        <a href="https://t.me/shiparez" target="_blank" className="hover:text-white transition-colors">
+          Telegram
+        </a>
+        <a href="https://linkedin.com/in/shiparez" target="_blank" className="hover:text-white transition-colors">
+          LinkedIn
+        </a>
+      </div>
+
+      {/* Копирайт */}
+      <div className="text-center text-xs text-white/40 mt-6">
+        © 2026 SHIPAREZIK
+      </div>
+    </div>
+  </div>
+)}
 
     {/* ==================== ВЫБОР ЯЗЫКА ==================== */}
     <div className="px-6 pb-10 pt-4 border-t border-white/10">
@@ -581,8 +642,6 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
         ))}
       </div>
     </div>
-  </div>
-)}
 
   {/* ==================== ORIGINAL CONTENT (НЕ ТРОГАТЬ) ==================== */}
   <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex justify-between items-center relative z-10">
