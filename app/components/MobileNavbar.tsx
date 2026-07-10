@@ -44,7 +44,7 @@ export default function MobileNavbar({
   return (
     <>
       {/* ==================== ЧИСТЫЙ ВЕРХНИЙ БАР — ТОЛЬКО ЛОГО ==================== */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-b border-white/10 px-5 pt-[max(14px,env(safe-area-inset-top))] pb-4">
+      <div className="md:hidden fixed top-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-b border-white/10 px-5 pt-[max(14px,env(safe-area-inset-top))] pb-6">
         <div 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="text-xl font-black tracking-[-1px] leading-none bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
@@ -177,11 +177,13 @@ export default function MobileNavbar({
               className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold active:scale-[0.985] transition-all"
             >
               {t("contact.emailBtn")}
-              
+
             </button>
 
             <div className="flex justify-center gap-6 text-sm text-white/50 mt-6">
-              <a href="https://github.com/shiparez" target="_blank" rel="noopener noreferrer" className="active:text-white">GitHub</a>
+              <a href="https://github.com/shiparezik" target="_blank" rel="noopener noreferrer" className="active:text-white">GitHub</a>
+              <a href="https://www.linkedin.com/in/danylo-shypotko-85924a33a/" target="_blank" rel="noopener noreferrer" className="active:text-white">LinkedIn</a>
+              <a href="https://mail.google.com/mail/?view=cm&fs=1&to=shiparezik1@gmail.com" target="_blank" rel="noopener noreferrer" className="active:text-white">Email</a>
               <a href="https://t.me/shiparez" target="_blank" rel="noopener noreferrer" className="active:text-white">Telegram</a>
             </div>
 
