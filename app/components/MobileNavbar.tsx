@@ -30,7 +30,6 @@ export default function MobileNavbar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
-  // Блокировка скролла при открытом меню
   useEffect(() => {
     if (isMenuOpen || isLangOpen) {
       document.body.style.overflow = 'hidden';
@@ -44,8 +43,18 @@ export default function MobileNavbar({
 
   return (
     <>
+      {/* ==================== ЧИСТЫЙ ВЕРХНИЙ БАР — ТОЛЬКО ЛОГО (RU и гамбургер убраны) ==================== */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-b border-white/10 px-5 py-4">
+        <div 
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          className="text-xl font-black tracking-[-1px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
+        >
+          SHIPAREZIK
+        </div>
+      </div>
+
       {/* ==================== НИЖНИЙ ТАБ-БАР ==================== */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10 pt-1">
         <div className="flex items-center justify-around px-1 py-2 max-w-lg mx-auto">
           {navItems.map((item) => (
             <button
