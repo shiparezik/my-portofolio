@@ -515,10 +515,10 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
 
 {/* ==================== ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ ==================== */}
 {isMenuOpen && (
-  <div className="md:hidden fixed inset-0 z-[90] bg-black/97 backdrop-blur-2xl">
+  <div className="md:hidden fixed inset-0 z-[95] bg-[#050505] flex flex-col">
     
     {/* Шапка */}
-    <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
+    <div className="flex justify-between items-center px-6 pt-12 pb-6 border-b border-white/10">
       <div 
         onClick={() => {
           window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -528,11 +528,16 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       >
         SHIPAREZIK
       </div>
-      <button onClick={() => setIsMenuOpen(false)} className="text-4xl text-white/70">×</button>
+      <button 
+        onClick={() => setIsMenuOpen(false)} 
+        className="text-white/70 hover:text-white text-4xl"
+      >
+        ×
+      </button>
     </div>
 
     {/* Навигация */}
-    <div className="px-6 py-2">
+    <div className="px-6 py-4 flex-1">
       {[
         { key: "nav.about", id: "about", icon: User },
         { key: "nav.skills", id: "skills", icon: Code2 },
@@ -550,9 +555,10 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       ))}
     </div>
 
-    {/* Выбор языка */}
-    <div className="px-6 pt-8">
+    {/* ==================== ВЫБОР ЯЗЫКА ==================== */}
+    <div className="px-6 pb-10 pt-4 border-t border-white/10">
       <div className="text-sm text-white/50 mb-3 px-1">Language</div>
+      
       <div className="grid grid-cols-2 gap-3">
         {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
           <button
@@ -561,7 +567,7 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
               changeLanguage(lang);
               setIsMenuOpen(false);
             }}
-            className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all
+            className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all active:scale-[0.985]
               ${currentLang === lang 
                 ? 'bg-purple-500/20 border-purple-400 text-purple-300' 
                 : 'bg-zinc-900 border-white/10 hover:border-white/30'}`}
@@ -785,51 +791,48 @@ initial={{ x: 120, opacity: 0 }}
 <section className="hero relative flex justify-center items-center min-h-screen pt-16 md:pt-20 overflow-hidden px-4">
   <div className="absolute inset-0 bg-[radial-gradient(#4f46e520_1px,transparent_1px)] [background-size:40px_40px]" />
   
-  <div className="glow glow1 absolute top-[-40%] left-[-20%] w-[700px] h-[700px] bg-purple-500/20 rounded-full blur-[130px]" />
-  <div className="glow glow2 absolute bottom-[-30%] right-[-25%] w-[900px] h-[900px] bg-pink-500/20 rounded-full blur-[150px]" />
+  <div className="glow glow1 absolute top-[-40%] left-[-20%] w-[650px] h-[650px] bg-purple-500/20 rounded-full blur-[120px]" />
+  <div className="glow glow2 absolute bottom-[-30%] right-[-25%] w-[850px] h-[850px] bg-pink-500/20 rounded-full blur-[140px]" />
 
-  {/* Плавающие звёзды (частицы) */}
+  {/* Плавающие звёзды (уменьшил количество на телефоне) */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
-    {Array.from({ length: 120 }).map((_, i) => {
-      const left = (i * 4.2) % 100;
-      const duration = 7 + (i % 25);
-      const isSpecial = i % 7 === 0;
+    {Array.from({ length: window.innerWidth < 768 ? 60 : 120 }).map((_, i) => {
+      const left = (i * 4.5) % 100;
+      const duration = 6 + (i % 20);
       return (
         <motion.div 
           key={i} 
-          className={`absolute w-[2px] h-[2px] rounded-full ${isSpecial ? 'bg-purple-400' : 'bg-white'}`} 
-          style={{ left: `${left}%`, top: `${(i * 7.5) % 100}%` }} 
+          className="absolute w-[1.5px] h-[1.5px] bg-white rounded-full" 
+          style={{ left: `${left}%`, top: `${(i * 8) % 100}%` }} 
           animate={{ 
-            y: [0, -400, 0], 
-            x: [0, (i % 5 - 2) * 25, 0], 
-            opacity: [0.15, 0.9, 0.15] 
+            y: [0, -350, 0], 
+            opacity: [0.1, 0.8, 0.1] 
           }} 
-          transition={{ duration, repeat: Infinity, delay: i * -0.15 }} 
+          transition={{ duration, repeat: Infinity, delay: i * -0.12 }} 
         />
       );
     })}
   </div>
 
-  {/* Плавающие иконки (эмодзи) */}
-  <div className="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
+  {/* Плавающие иконки (показываем на телефоне, но меньше и реже) */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
     {[
-      { Icon: Code2, left: '14%', top: '28%', delay: 0, color: '#a855f7' },
-      { Icon: Zap, left: '82%', top: '38%', delay: 1.1, color: '#ec4899' },
-      { Icon: Trophy, left: '20%', top: '65%', delay: 0.7, color: '#22d3ee' },
-      { Icon: Heart, left: '75%', top: '58%', delay: 2.0, color: '#f472b6' },
+      { Icon: Code2, left: '15%', top: '30%', delay: 0, color: '#a855f7' },
+      { Icon: Zap, left: '80%', top: '40%', delay: 1.2, color: '#ec4899' },
+      { Icon: Trophy, left: '22%', top: '62%', delay: 0.6, color: '#22d3ee' },
     ].map(({ Icon, left, top, delay, color }, idx) => (
       <motion.div 
         key={idx} 
         className="absolute" 
         style={{ left, top }} 
         animate={{ 
-          y: [0, -30, 0], 
-          rotate: [-8, 8, -8], 
-          scale: [0.9, 1.1, 0.9] 
+          y: [0, -25, 0], 
+          rotate: [-6, 6, -6], 
+          scale: [0.9, 1.05, 0.9] 
         }} 
-        transition={{ duration: 5.5, repeat: Infinity, delay }}
+        transition={{ duration: 5, repeat: Infinity, delay }}
       >
-        <Icon size={36} style={{ color }} strokeWidth={1.5} />
+        <Icon size={window.innerWidth < 768 ? 28 : 38} style={{ color }} strokeWidth={1.5} />
       </motion.div>
     ))}
   </div>
@@ -893,14 +896,12 @@ initial={{ x: 120, opacity: 0 }}
     </div>
   </div>
 
-  {/* Анимированная стрелка вниз */}
-
   <motion.div 
-    animate={{ y: [0, 20, 0] }} 
-    transition={{ repeat: Infinity, duration: 2.2 }} 
+    animate={{ y: [0, 18, 0] }} 
+    transition={{ repeat: Infinity, duration: 2 }} 
     className="absolute bottom-8 left-1/2 -translate-x-1/2 text-purple-400/70"
   >
-    <ArrowDown size={38} strokeWidth={1.8} />
+    <ArrowDown size={36} strokeWidth={1.8} />
   </motion.div>
 </section>
 
