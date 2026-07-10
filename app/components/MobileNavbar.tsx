@@ -100,61 +100,66 @@ export default function MobileNavbar({
             ))}
           </div>
 
-{/* ==================== ВЫБОР ЯЗЫКА + КОНТАКТЫ ==================== */}
-<div className="px-6 pb-10 pt-6 border-t border-white/10 mt-auto">
-  
-  {/* Выбор языка */}
-  <div className="mb-6">
-    <div className="text-sm text-white/50 mb-3 px-1">Language</div>
-    <div className="grid grid-cols-2 gap-3">
-      {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
-        <button
-          key={lang}
-          onClick={() => {
-            changeLanguage(lang);
-            setIsMenuOpen(false);
-          }}
-          className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all active:scale-[0.985]
-            ${currentLang === lang 
-              ? 'bg-purple-500/20 border-purple-400 text-purple-300' 
-              : 'bg-zinc-900 border-white/10 hover:border-white/30'}`}
-        >
-          <span className="text-3xl">{languageFlags[lang]}</span>
-          <div>
-            <div className="font-medium">{languageNames[lang]}</div>
-            <div className="text-xs text-zinc-500">{lang.toUpperCase()}</div>
+          {/* ==================== ВЫБОР ЯЗЫКА + КОНТАКТЫ ==================== */}
+          <div className="px-6 pb-10 pt-6 border-t border-white/10 mt-auto">
+            
+            {/* Выбор языка */}
+            <div className="mb-6">
+              <div className="text-sm text-white/50 mb-3 px-1">Language</div>
+              <div className="grid grid-cols-2 gap-3">
+                {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
+                  <button
+                    key={lang}
+                    onClick={() => {
+                      changeLanguage(lang);
+                      setIsMenuOpen(false);
+                    }}
+                    className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all active:scale-[0.985]
+                      ${currentLang === lang 
+                        ? 'bg-purple-500/20 border-purple-400 text-purple-300' 
+                        : 'bg-zinc-900 border-white/10 hover:border-white/30'}`}
+                  >
+                    <span className="text-3xl">{languageFlags[lang]}</span>
+                    <div>
+                      <div className="font-medium">{languageNames[lang]}</div>
+                      <div className="text-xs text-zinc-500">{lang.toUpperCase()}</div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Кнопка связи */}
+            <button
+              onClick={() => {
+                scrollToSection('contact');
+                setIsMenuOpen(false);
+              }}
+              className="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg mb-4 active:scale-[0.985] transition-all"
+            >
+              Написать мне
+            </button>
+
+            {/* Социальные сети */}
+            <div className="flex justify-center gap-6 text-white/60">
+              <a href="https://github.com/shiparez" target="_blank" className="hover:text-white transition-colors">
+                GitHub
+              </a>
+              <a href="https://t.me/shiparez" target="_blank" className="hover:text-white transition-colors">
+                Telegram
+              </a>
+              <a href="https://linkedin.com/in/shiparez" target="_blank" className="hover:text-white transition-colors">
+                LinkedIn
+              </a>
+            </div>
+
+            {/* Копирайт */}
+            <div className="text-center text-xs text-white/40 mt-6">
+              © 2026 SHIPAREZIK
+            </div>
           </div>
-        </button>
-      ))}
-    </div>
-  </div>
-
-  {/* Кнопка связи */}
-  <button
-    onClick={() => {
-      scrollToSection('contact');
-      setIsMenuOpen(false);
-    }}
-    className="w-full py-4 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold text-lg mb-4 active:scale-[0.985] transition-all"
-  >
-    Написать мне
-  </button>
-
-  {/* Социальные сети */}
-  <div className="flex justify-center gap-6 text-white/60">
-    <a href="https://github.com/shiparez" target="_blank" className="hover:text-white transition-colors">
-      GitHub
-    </a>
-    <a href="https://t.me/shiparez" target="_blank" className="hover:text-white transition-colors">
-      Telegram
-    </a>
-    <a href="https://linkedin.com/in/shiparez" target="_blank" className="hover:text-white transition-colors">
-      LinkedIn
-    </a>
-  </div>
-
-  {/* Копирайт */}
-  <div className="text-center text-xs text-white/40 mt-6">
-    © 2026 SHIPAREZIK
-  </div>
-</div>
+        </div>
+      )}
+    </>
+  );
+}
