@@ -285,15 +285,13 @@ export default function Home() {
   }, []);
 
   // 4. Функция t (ОБЯЗАТЕЛЬНО ЗДЕСЬ!)
-  const t = (key: string): string => {
-    if (!messages) return key;
-    const keys = key.split('.');
-    let result = messages;
-    for (const k of keys) {
-      result = result?.[k];
-    }
-    return result || key;
-  };
+const t = (key: string) => {
+  if (!messages) return key;
+  const keys = key.split('.');
+  let result: any = messages;
+  for (const k of keys) result = result?.[k];
+  return result ?? key;
+};
 
   const changeLanguage = (lang: 'en' | 'pl' | 'uk' | 'ru') => {
     setCurrentLang(lang);
