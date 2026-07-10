@@ -43,11 +43,11 @@ export default function MobileNavbar({
 
   return (
     <>
-      {/* ==================== ЧИСТЫЙ ВЕРХНИЙ БАР — ТОЛЬКО ЛОГО (RU и гамбургер убраны) ==================== */}
-      <div className="md:hidden fixed top-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-b border-white/10 px-5 py-4">
+      {/* ==================== ЧИСТЫЙ ВЕРХНИЙ БАР — ТОЛЬКО ЛОГО ==================== */}
+      <div className="md:hidden fixed top-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-b border-white/10 px-5 pt-5 pb-4">
         <div 
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          className="text-xl font-black tracking-[-1px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
+          className="text-2xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
         >
           SHIPAREZIK
         </div>
