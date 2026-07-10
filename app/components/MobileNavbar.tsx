@@ -30,44 +30,67 @@ export default function MobileNavbar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
-  // Блокировка скролла при открытом меню/языке (как в нативных приложениях)
+  // Блокировка скролла (нативный уровень)
   useEffect(() => {
     if (isMenuOpen || isLangOpen) {
-      const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = 'hidden';
-      return () => {
-        document.body.style.overflow = originalOverflow;
-      };
+    } else {
+      document.body.style.overflow = '';
     }
+    return () => {
+      document.body.style.overflow = '';
+    };
   }, [isMenuOpen, isLangOpen]);
-
-  const closeAll = () => {
-    setIsMenuOpen(false);
-    setIsLangOpen(false);
-  };
 
   return (
     <>
-      {/* ==================== ЧИСТЫЙ НИЖНИЙ ТАБ-БАР (только навигация) ==================== */}
+      {/* ==================== НИЖНИЙ ТАБ-БАР (с lang и menu) ==================== */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10">
-        <div className="flex items-center justify-around px-2 py-2.5 max-w-md mx-auto">
+        <div className="flex items-center justify-around px-1 py-2 max-w-lg mx-auto">
           {navItems.map((item) => (
             <button
               key={item.id}
               onClick={() => scrollToSection(item.id)}
-              className="flex flex-col items-center gap-0.5 px-4 py-1.5 text-white/70 active:text-white active:scale-95 transition-all active:bg-white/5 rounded-xl"
+              className="flex flex-col items-center gap-0.5 px-3 py-1.5 text-white/70 active:text-white active:scale-95 transition-all active:bg-white/5 rounded-xl"
             >
-              <item.icon size={22} />
+              <item.icon size={21} />
               <span className="text-[10px] tracking-wider font-medium">{t(item.key)}</span>
             </button>
           ))}
+
+          {/* Кнопка Язык */}
+          <button 
+            onClick={() => {
+              setIsLangOpen(true);
+              setIsMenuOpen(false);
+            }} 
+            className="flex flex-col items-center gap-0.5 px-3 py-1.5 text-white/70 active:text-white active:scale-95 transition-all active:bg-white/5 rounded-xl"
+          >
+            <span className="text-2xl">{languageFlags[currentLang]}</span>
+            <span className="text-[9px] tracking-wider">Lang</span>
+          </button>
+
+          {/* Кнопка Menu */}
+          <button 
+            onClick={() => {
+              setIsMenuOpen(!isMenuOpen);
+              setIsLangOpen(false);
+            }} 
+            className="flex flex-col items-center gap-0.5 px-3 py-1.5 text-white/70 active:text-white active:scale-95 transition-all active:bg-white/5 rounded-xl"
+          >            <div className="space-y-0.5">
+              <div className="w-4 h-0.5 bg-white" />
+              <div className="w-4 h-0.5 bg-white" />
+              <div className="w-4 h-0.5 bg-white" />
+            </div>
+            <span className="text-[9px] tracking-wider">Menu</span>
+          </button>
         </div>
       </div>
 
-      {/* ==================== МОДАЛКА ЯЗЫКОВ (оставил, открывается из верхнего бара) ==================== */}
+      {/* ==================== МОДАЛКА ЯЗЫКОВ ==================== */}
       {isLangOpen && (
         <div 
-          className="md:hidden fixed inset-0 z-[999] bg-black/95 flex items-center justify-center p-4"
+          className="md:hidden fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4"
           onClick={() => setIsLangOpen(false)}
         >
           <div 
@@ -76,12 +99,7 @@ export default function MobileNavbar({
           >
             <div className="flex justify-between items-center mb-5 px-1">
               <div className="text-lg font-semibold">Language</div>
-              <button 
-                onClick={() => setIsLangOpen(false)} 
-                className="text-3xl text-white/50 active:text-white active:scale-95 transition-transform"
-              >
-                ×
-              </button>
+              <button onClick={() => setIsLangOpen(false)} className="text-3xl text-white/50 active:text-white active:scale-95">×</button>
             </div>
 
             <div className="grid grid-cols-2 gap-3">
@@ -109,29 +127,22 @@ export default function MobileNavbar({
         </div>
       )}
 
-      {/* ==================== ПОЛНОЭКРАННОЕ МЕНЮ (solid, не прозрачное, z-999) ==================== */}
+      {/* ==================== ПОЛНОЭКРАННОЕ МЕНЮ (z-[9999] + h-[100dvh] — теперь открывается до конца, solid, без протечек) ==================== */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-[999] bg-black flex flex-col">
-          {/* Header */}
+        <div className="md:hidden fixed inset-0 z-[9999] bg-black flex flex-col h-[100dvh]">
           <div className="flex justify-between items-center px-5 pt-12 pb-4 border-b border-white/10">
             <div 
               onClick={() => {
                 window.scrollTo({ top: 0, behavior: 'smooth' });
                 setIsMenuOpen(false);
               }}
-              className="text-2xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer active:opacity-80 transition-opacity"
+              className="text-2xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer active:opacity-80"
             >
               SHIPAREZIK
             </div>
-            <button 
-              onClick={() => setIsMenuOpen(false)} 
-              className="text-4xl text-white/60 active:text-white active:scale-95 transition-all px-2 -mr-2"
-            >
-              ×
-            </button>
+            <button onClick={() => setIsMenuOpen(false)} className="text-4xl text-white/60 active:text-white active:scale-95 px-2 -mr-2">×</button>
           </div>
 
-          {/* Навигация */}
           <div className="px-5 py-2 flex-1 overflow-y-auto">
             {navItems.map((item) => (
               <button
@@ -140,29 +151,28 @@ export default function MobileNavbar({
                   scrollToSection(item.id);
                   setIsMenuOpen(false);
                 }}
-                className="flex items-center gap-4 w-full py-4 text-left text-lg border-b border-white/10 active:bg-white/5 transition-colors rounded-lg active:scale-[0.995]"
+                className="flex items-center gap-4 w-full py-4 text-left text-lg border-b border-white/10 active:bg-white/5 transition-colors active:scale-[0.995] rounded-lg"
               >
                 <item.icon size={23} className="text-purple-400" />
-                <span>{t(item.key)}</span>
+                {t(item.key)}
               </button>
             ))}
           </div>
 
-          {/* Футер меню */}
           <div className="px-5 pb-10 pt-4 border-t border-white/10 bg-black">
             <button
               onClick={() => {
                 scrollToSection('contact');
                 setIsMenuOpen(false);
               }}
-              className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold active:scale-[0.985] transition-all active:brightness-110"
+              className="w-full py-3.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold active:scale-[0.985] transition-all"
             >
               Написать мне
             </button>
 
             <div className="flex justify-center gap-6 text-sm text-white/50 mt-6">
-              <a href="https://github.com/shiparez" target="_blank" rel="noopener noreferrer" className="active:text-white transition-colors">GitHub</a>
-              <a href="https://t.me/shiparez" target="_blank" rel="noopener noreferrer" className="active:text-white transition-colors">Telegram</a>
+              <a href="https://github.com/shiparez" target="_blank" rel="noopener noreferrer" className="active:text-white">GitHub</a>
+              <a href="https://t.me/shiparez" target="_blank" rel="noopener noreferrer" className="active:text-white">Telegram</a>
             </div>
 
             <div className="text-center text-xs text-white/35 mt-7">
