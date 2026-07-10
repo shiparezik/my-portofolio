@@ -310,9 +310,9 @@ const t = (key: string) => {
   }
 
   return (
-    <main className="bg-black text-white overflow-hidden min-h-screen relative">
+    <main className="bg-black text-white overflow-visible min-h-screen relative">
       {/* Background Effects */}
-      <div className="fixed inset-0 z-[-1] overflow-hidden pointer-events-none">
+      <div className="fixed inset-0 z-[-1] overflow-visible pointer-events-none">
         <div className="absolute inset-0 bg-[radial-gradient(#4f46e520_1px,transparent_1px)] [background-size:60px_60px]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black/95 to-black" />
         <motion.div animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.75, 0.4], rotate: [0, 15, 0] }} transition={{ duration: 28, repeat: Infinity }} className="absolute top-[-25%] left-[-15%] w-[950px] h-[950px] bg-purple-600/15 rounded-full blur-[160px]" />
@@ -334,8 +334,8 @@ const t = (key: string) => {
              shadow-[0_18px_80px_-25px_rgb(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(168,85,247,0.2)]
              rounded-br-[3rem] rounded-bl-[3rem]"
 >
-  {/* === ТЁМНЫЙ КОСМИЧЕСКИЙ ФОН === */}
-  <div className="absolute inset-0 z-0 pointer-events-none overflow-visible">
+  {/* === ФОН (теперь с overflow-hidden, чтобы не вылезал за скругления) === */}
+  <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-br-[3rem] rounded-bl-[3rem]">
 
     {/* Глубокий космос */}
     <div className="absolute inset-0 opacity-80" style={{
@@ -415,75 +415,110 @@ const t = (key: string) => {
 
   {/* Noise texture */}
   <div 
-    className="absolute inset-0 z-[1] pointer-events-none opacity-[0.025] mix-blend-overlay"
+    className="absolute inset-0 z-[1] pointer-events-none opacity-[0.025] mix-blend-overlay rounded-br-[3rem] rounded-bl-[3rem]"
     style={{
       backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)'/%3E%3C/svg%3E")`,
       backgroundSize: '110px 110px'
     }}
   />
 
-{/* ==================== МОБИЛЬНЫЙ НАВБАР (только для телефона) ==================== */}
-  <div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
-    <div className="flex items-center justify-around px-2 py-3">
-      
-      {/* Кнопки навигации */}
-      {[
-        { key: "nav.about", id: "about", icon: User },
-        { key: "nav.skills", id: "skills", icon: Code2 },
-        { key: "nav.projects", id: "projects", icon: Briefcase },
-        { key: "nav.contact", id: "contact", icon: Mail }
-      ].map((item) => (
-        <button
-          key={item.id}
-          onClick={() => scrollToSection(item.id)}
-          className="flex flex-col items-center gap-1 text-white/70 active:text-white"
-        >
-          <item.icon size={22} />
-          <span className="text-[10px] tracking-wider">{t(item.key)}</span>
-        </button>
-      ))}
-
-      {/* Кнопка Menu */}
-      <button 
-        onClick={() => setIsMenuOpen(!isMenuOpen)} 
-        className="flex flex-col items-center gap-1 text-white/70 active:text-white"
+{/* ==================== МОБИЛЬНЫЙ НИЖНИЙ НАВБАР ==================== */}
+<div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
+  <div className="flex items-center justify-around px-1 py-2.5">
+    
+    {/* Навигационные кнопки */}
+    {[
+      { key: "nav.about", id: "about", icon: User },
+      { key: "nav.skills", id: "skills", icon: Code2 },
+      { key: "nav.projects", id: "projects", icon: Briefcase },
+      { key: "nav.contact", id: "contact", icon: Mail }
+    ].map((item) => (
+      <button
+        key={item.id}
+        onClick={() => scrollToSection(item.id)}
+        className="flex flex-col items-center gap-1 px-3 py-1 text-white/70 active:text-white active:scale-95 transition-all"
       >
-        <div className="space-y-1">
-          <div className="w-5 h-0.5 bg-white" />
-          <div className="w-5 h-0.5 bg-white" />
-          <div className="w-5 h-0.5 bg-white" />
-        </div>
-        <span className="text-[10px]">Menu</span>
+        <item.icon size={22} />
+        <span className="text-[10px] tracking-wider">{t(item.key)}</span>
       </button>
-    </div>
-  </div>
+    ))}
 
-{/* ==================== МОБИЛЬНОЕ МЕНЮ ==================== */}
+    {/* Кнопка Menu */}
+    <button 
+      onClick={() => setIsMenuOpen(!isMenuOpen)} 
+      className="flex flex-col items-center gap-1 px-3 py-1 text-white/70 active:text-white active:scale-95 transition-all"
+    >
+      <div className="space-y-1">
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+      </div>
+      <span className="text-[10px] tracking-wider">Menu</span>
+    </button>
+  </div>
+</div>
+
+{/* ==================== ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ ==================== */}
 {isMenuOpen && (
-  <div className="md:hidden fixed inset-0 z-[80] bg-black/95 backdrop-blur-xl">
-    <div className="flex justify-between items-center px-6 py-5 border-b border-white/10">
-      <div className="text-2xl font-black tracking-[-1px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent">
+  <div className="md:hidden fixed inset-0 z-[90] bg-black/98 backdrop-blur-xl">
+    
+    {/* Шапка */}
+    <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
+      <div className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent">
         SHIPAREZIK
       </div>
-      <button onClick={() => setIsMenuOpen(false)} className="text-4xl">×</button>
+      <button 
+        onClick={() => setIsMenuOpen(false)} 
+        className="text-white/70 hover:text-white text-4xl leading-none"
+      >
+        ×
+      </button>
     </div>
 
-    <div className="flex flex-col px-6 py-6 text-xl">
+    {/* Навигация */}
+    <div className="px-6 py-4">
       {[
         { key: "nav.about", id: "about", icon: User },
         { key: "nav.skills", id: "skills", icon: Code2 },
         { key: "nav.projects", id: "projects", icon: Briefcase },
         { key: "nav.contact", id: "contact", icon: Mail }
-      ].map((item) => (
+      ].map((item, index) => (
         <button
           key={item.id}
           onClick={() => scrollToSection(item.id)}
-          className="flex items-center gap-4 py-6 border-b border-white/10 text-left active:bg-white/5"
+          className="flex items-center gap-4 w-full py-5 text-left text-xl border-b border-white/10 active:bg-white/5 transition-colors"
         >
           <item.icon size={24} className="text-purple-400" />
           {t(item.key)}
         </button>
       ))}
+    </div>
+
+    {/* ==================== ВЫБОР ЯЗЫКА ==================== */}
+    <div className="px-6 pt-6">
+      <div className="text-sm text-white/50 mb-3 px-1">Language / Язык</div>
+      
+      <div className="grid grid-cols-2 gap-3">
+        {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
+          <button
+            key={lang}
+            onClick={() => {
+              changeLanguage(lang);
+              setIsMenuOpen(false);
+            }}
+            className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all active:scale-[0.985]
+              ${currentLang === lang 
+                ? 'bg-purple-500/20 border-purple-400 text-purple-300' 
+                : 'bg-zinc-900 border-white/10 hover:border-white/30'}`}
+          >
+            <span className="text-3xl">{languageFlags[lang]}</span>
+            <div className="text-left">
+              <div className="font-medium">{languageNames[lang]}</div>
+              <div className="text-xs text-zinc-500">{lang.toUpperCase()}</div>
+            </div>
+          </button>
+        ))}
+      </div>
     </div>
   </div>
 )}
