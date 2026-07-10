@@ -1,0 +1,145 @@
+@import "tailwindcss";
+
+:root {
+  --background: #050505;
+  --foreground: #ffffff;
+  --purple: #a855f7;
+  --pink: #db2777;
+  --cyan: #22d3ee;
+}
+
+/* Красивый современный шрифт */
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #050505;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* Космический градиент + анимация */
+body {
+  background: linear-gradient(135deg, #0a001f, #1a0033, #001220, #0a001f);
+  background-size: 400% 400%;
+  animation: cosmicFlow 25s ease infinite;
+}
+
+@keyframes cosmicFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ====================== HERO ====================== */
+.hero-title {
+  font-size: clamp(70px, 10vw, 160px);
+  font-weight: 900;
+  letter-spacing: -6px;
+  background: linear-gradient(90deg, #ffffff, #c084fc, #67e8f9, #f472b6, #ffffff);
+  background-size: 300%;
+  color: transparent;
+  animation: titleGlow 8s linear infinite;
+  text-shadow: 0 0 40px rgba(192, 132, 252, 0.6);
+}
+
+@keyframes titleGlow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 300% 50%; }
+}
+
+/* Glow эффекты */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.35;
+  z-index: 0;
+}
+
+.glow1 {
+  background: #c026d3;
+  width: 650px;
+  height: 650px;
+  animation: glowPulse1 14s infinite alternate ease-in-out;
+}
+
+.glow2 {
+  background: #22d3ee;
+  width: 720px;
+  height: 720px;
+  animation: glowPulse2 18s infinite alternate ease-in-out;
+}
+
+@keyframes glowPulse1 {
+  to { transform: scale(1.25) translate(80px, 60px); }
+}
+
+@keyframes glowPulse2 {
+  to { transform: scale(1.2) translate(-100px, -70px); }
+}
+
+/* Кнопки */
+.hero-btn {
+  padding: 18px 38px;
+  border-radius: 9999px;
+  background: linear-gradient(90deg, #8b5cf6, #ec4899);
+  font-weight: 700;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.5);
+}
+
+.hero-btn:hover {
+  transform: translateY(-6px) scale(1.06);
+  box-shadow: 0 0 50px rgba(236, 72, 153, 0.7);
+}
+
+.hero-btn-outline {
+  padding: 18px 38px;
+  border-radius: 9999px;
+  border: 2px solid #a855f7;
+  transition: all 0.4s ease;
+}
+
+.hero-btn-outline:hover {
+  background: rgba(168, 85, 247, 0.15);
+  border-color: #db2777;
+  color: white;
+}
+
+/* Particles */
+.particle {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #c084fc;
+}
+
+/* Navbar */
+nav {
+  background: rgba(3, 3, 3, 0.85) !important;
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(168, 85, 247, 0.2);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #a855f7;
+  border-radius: 20px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #c026d3;
+}
+
+/* Matrix / Hacker effect */
+.matrix {
+  font-family: 'Courier New', monospace;
+  color: #67e8f9;
+  text-shadow: 0 0 10px #67e8f9;
+}

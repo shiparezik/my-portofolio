@@ -1,0 +1,61 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "contact": "Contact",
+    "projectsBtn": "Projects"
+  },
+  "hero": {
+    "greeting": "HELLO, I'M",
+    "name": "SHIPAREZIK",
+    "role": "Full Stack Developer",
+    "description": "17-year-old passionate developer from Poland crafting beautiful, fast, and modern digital experiences."
+  },
+  "about": {
+    "title": "About Me",
+    "p1": "Hi, I'm Danylo, a 17-year-old Software Engineering student in my 3rd year.",
+    "p2": "Started with HTML/CSS, fell in love with JavaScript, React & Next.js, and now building full-stack applications with modern tools.",
+    "p3": "Fast learner, problem-solver, and creative coder who enjoys turning ideas into polished digital products.",
+    "p4": "Programming for me is more than code — it's creativity, continuous growth, and the joy of solving real problems."
+  },
+  "location": "Poland",
+  "openTo": "Open to opportunities",
+  "skills": {
+    "title": "My Skills",
+    "frontend": "FRONTEND",
+    "backend": "BACKEND & LANGUAGES",
+    "other": "OTHER",
+    "techs": {
+      "html": "The foundation of all web pages. Markup language for structuring content.",
+      "css": "Styling language. I create modern, responsive and beautiful designs.",
+      "javascript": "Core programming language of the web. Makes websites interactive.",
+      "react": "Popular library for building fast and dynamic user interfaces.",
+      "nextjs": "Powerful React framework for high-performance websites.",
+      "typescript": "Typed superset of JavaScript. Helps write more reliable code.",
+      "tailwind": "Utility-first CSS framework. Extremely fast UI development.",
+      "framer": "Library for smooth and beautiful animations in React.",
+      "python": "Versatile language. Great for backend, automation and data processing.",
+      "csharp": "Powerful language used in game development and enterprise applications.",
+      "cpp": "High-performance language for system programming.",
+      "nodejs": "JavaScript runtime for scalable backend applications.",
+      "express": "Minimalist web framework for Node.js.",
+      "sql": "Language for working with relational databases.",
+      "git": "Version control system. Used for all my projects and collaboration.",
+      "figma": "Professional design tool for UI/UX.",
+      "restapi": "Creating and working with APIs to connect frontend and backend.",
+      "fullstack": "Building complete web applications from start to finish.",
+      "webapps": "Developing modern, fast and responsive websites and web apps."
+    }
+  },
+  "projects": {
+    "title": "My Projects",
+    "subtitle": "Real stuff I built"
+  },
+  "contact": {
+    "title": "Let's Build Something Awesome Together",
+    "subtitle": "Have an exciting idea or just want to chat about tech?",
+    "emailBtn": "Send me an email"
+  },
+  "footer": "© 2026 Shiparezik • Built with Next.js, Framer Motion & Passion"
+}
