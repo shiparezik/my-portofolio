@@ -30,7 +30,7 @@ export default function MobileNavbar({
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangOpen, setIsLangOpen] = useState(false);
 
-  // Блокировка скролла (нативный уровень)
+  // Блокировка скролла при открытом меню
   useEffect(() => {
     if (isMenuOpen || isLangOpen) {
       document.body.style.overflow = 'hidden';
@@ -44,7 +44,7 @@ export default function MobileNavbar({
 
   return (
     <>
-      {/* ==================== НИЖНИЙ ТАБ-БАР (с lang и menu) ==================== */}
+      {/* ==================== НИЖНИЙ ТАБ-БАР ==================== */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10">
         <div className="flex items-center justify-around px-1 py-2 max-w-lg mx-auto">
           {navItems.map((item) => (
@@ -77,7 +77,8 @@ export default function MobileNavbar({
               setIsLangOpen(false);
             }} 
             className="flex flex-col items-center gap-0.5 px-3 py-1.5 text-white/70 active:text-white active:scale-95 transition-all active:bg-white/5 rounded-xl"
-          >            <div className="space-y-0.5">
+          >
+            <div className="space-y-0.5">
               <div className="w-4 h-0.5 bg-white" />
               <div className="w-4 h-0.5 bg-white" />
               <div className="w-4 h-0.5 bg-white" />
@@ -86,8 +87,7 @@ export default function MobileNavbar({
           </button>
         </div>
       </div>
-
-      {/* ==================== МОДАЛКА ЯЗЫКОВ ==================== */}
+            {/* ==================== МОДАЛКА ЯЗЫКОВ ==================== */}
       {isLangOpen && (
         <div 
           className="md:hidden fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4"
@@ -127,7 +127,7 @@ export default function MobileNavbar({
         </div>
       )}
 
-      {/* ==================== ПОЛНОЭКРАННОЕ МЕНЮ (z-[9999] + h-[100dvh] — теперь открывается до конца, solid, без протечек) ==================== */}
+      {/* ==================== ПОЛНОЭКРАННОЕ МЕНЮ ==================== */}
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 z-[9999] bg-black flex flex-col h-[100dvh]">
           <div className="flex justify-between items-center px-5 pt-12 pb-4 border-b border-white/10">
