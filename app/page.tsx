@@ -331,24 +331,21 @@ const t = (key: string) => {
   className="fixed top-0 left-0 right-0 z-50 overflow-hidden border-b border-white/10 
              bg-black/70 backdrop-blur-[26px] backdrop-saturate-150 
              shadow-[0_18px_80px_-25px_rgb(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(168,85,247,0.2)]
-             rounded-br-[3.5rem] rounded-bl-[3.5rem]"
+             rounded-br-[3rem] rounded-bl-[3rem]"
 >
-  {/* === ТЁМНЫЙ КОСМИЧЕСКИЙ ФОН С МНОЖЕСТВОМ ОБЪЕКТОВ === */}
+  {/* === ТЁМНЫЙ КОСМИЧЕСКИЙ ФОН === */}
   <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
 
-    {/* 1. Очень тёмный глубокий космос */}
-    <div 
-      className="absolute inset-0 opacity-80"
-      style={{
-        background: `
-          radial-gradient(circle at 18% 22%, rgba(124,58,237,0.18) 0%, transparent 48%),
-          radial-gradient(circle at 82% 68%, rgba(190,24,93,0.14) 0%, transparent 52%),
-          radial-gradient(circle at 52% 12%, rgba(6,182,212,0.12) 0%, transparent 42%)
-        `
-      }}
-    />
+    {/* Глубокий космос */}
+    <div className="absolute inset-0 opacity-80" style={{
+      background: `
+        radial-gradient(circle at 18% 22%, rgba(124,58,237,0.18) 0%, transparent 48%),
+        radial-gradient(circle at 82% 68%, rgba(190,24,93,0.14) 0%, transparent 52%),
+        radial-gradient(circle at 52% 12%, rgba(6,182,212,0.12) 0%, transparent 42%)
+      `
+    }} />
 
-    {/* 2. Aurora слой 1 */}
+    {/* Aurora слой 1 */}
     <motion.div
       className="absolute inset-0 opacity-22 mix-blend-screen"
       animate={{ backgroundPosition: ['0% 45%', '100% 55%', '0% 45%'] }}
@@ -359,7 +356,7 @@ const t = (key: string) => {
       }}
     />
 
-    {/* 3. Aurora слой 2 */}
+    {/* Aurora слой 2 */}
     <motion.div
       className="absolute inset-0 opacity-18 mix-blend-screen"
       animate={{ backgroundPosition: ['100% 38%', '0% 62%', '100% 38%'] }}
@@ -370,7 +367,7 @@ const t = (key: string) => {
       }}
     />
 
-    {/* 4. Плавающие орбы */}
+    {/* Плавающие орбы */}
     <motion.div className="absolute -top-8 left-[5%] w-[170px] h-[170px] rounded-full bg-violet-500/8 blur-[80px]"
       animate={{ x: [0, 50, -30, 0], y: [0, -20, 14, 0] }} transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }} />
     
@@ -379,55 +376,38 @@ const t = (key: string) => {
     
     <motion.div className="absolute bottom-[8%] left-[22%] w-[95px] h-[95px] rounded-full bg-fuchsia-400/8 blur-[60px]"
       animate={{ x: [0, 35, -25, 0], y: [0, -14, 20, 0] }} transition={{ duration: 27, repeat: Infinity, ease: "easeInOut", delay: 8 }} />
-    
-    <motion.div className="absolute top-[28%] right-[25%] w-[78px] h-[78px] rounded-full bg-indigo-400/8 blur-[55px]"
-      animate={{ x: [0, -28, 22, 0], y: [0, 18, -12, 0] }} transition={{ duration: 32, repeat: Infinity, ease: "easeInOut", delay: 3 }} />
-    
-    <motion.div className="absolute bottom-[18%] right-[15%] w-[105px] h-[105px] rounded-full bg-sky-400/8 blur-[70px]"
-      animate={{ x: [0, 30, -35, 0], y: [0, -18, 12, 0] }} transition={{ duration: 38, repeat: Infinity, ease: "easeInOut", delay: 11 }} />
 
-    {/* 5. Центральное мягкое свечение */}
+    {/* Центральное свечение */}
     <motion.div 
       className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[90px] rounded-full bg-purple-500/5 blur-[90px]"
       animate={{ opacity: [0.3, 0.55, 0.3], scale: [1, 1.08, 1] }}
       transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
     />
 
-    {/* 6. Звёзды */}
+    {/* Звёзды */}
     <motion.div className="absolute left-[7%] top-[20%] w-[1.5px] h-[1.5px] bg-white/50 rounded-full" animate={{ opacity: [0.2, 0.7, 0.2] }} transition={{ duration: 3.8, repeat: Infinity }} />
-    <motion.div className="absolute left-[14%] top-[58%] w-[2px] h-[2px] bg-white/40 rounded-full" animate={{ opacity: [0.15, 0.6, 0.15] }} transition={{ duration: 5.2, repeat: Infinity, delay: 1.3 }} />
     <motion.div className="absolute left-[26%] top-[35%] w-[1.5px] h-[1.5px] bg-white/45 rounded-full" animate={{ opacity: [0.25, 0.65, 0.25] }} transition={{ duration: 4.1, repeat: Infinity, delay: 2.6 }} />
-    <motion.div className="absolute left-[39%] top-[72%] w-[2px] h-[2px] bg-white/35 rounded-full" animate={{ opacity: [0.1, 0.55, 0.1] }} transition={{ duration: 4.7, repeat: Infinity, delay: 0.8 }} />
     <motion.div className="absolute left-[53%] top-[26%] w-[1.5px] h-[1.5px] bg-white/50 rounded-full" animate={{ opacity: [0.18, 0.62, 0.18] }} transition={{ duration: 3.5, repeat: Infinity, delay: 3.2 }} />
-    <motion.div className="absolute left-[66%] top-[62%] w-[2px] h-[2px] bg-white/40 rounded-full" animate={{ opacity: [0.12, 0.58, 0.12] }} transition={{ duration: 5.0, repeat: Infinity, delay: 1.9 }} />
     <motion.div className="absolute left-[78%] top-[41%] w-[1.5px] h-[1.5px] bg-white/45 rounded-full" animate={{ opacity: [0.22, 0.68, 0.22] }} transition={{ duration: 4.3, repeat: Infinity, delay: 2.1 }} />
-    <motion.div className="absolute left-[88%] top-[65%] w-[2px] h-[2px] bg-white/38 rounded-full" animate={{ opacity: [0.14, 0.52, 0.14] }} transition={{ duration: 4.9, repeat: Infinity, delay: 0.5 }} />
 
-    {/* 7. HUD угловые скобки */}
+    {/* HUD элементы */}
     <div className="absolute top-[10px] left-[14px] w-6 h-px bg-purple-400/50" />
     <div className="absolute top-[10px] left-[14px] w-px h-6 bg-purple-400/50" />
     <div className="absolute top-[10px] right-[14px] w-6 h-px bg-cyan-400/50" />
     <div className="absolute top-[10px] right-[14px] w-px h-6 bg-cyan-400/50" />
 
-    {/* 8. Диагональные линии */}
-    <div className="absolute top-4 left-[22%] w-8 h-px bg-gradient-to-r from-purple-400/40 to-transparent rotate-[-25deg]" />
-    <div className="absolute top-4 right-[22%] w-8 h-px bg-gradient-to-l from-cyan-400/40 to-transparent rotate-[25deg]" />
-
-    {/* 9. Вертикальные HUD линии */}
     <div className="absolute left-7 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-purple-400/25 to-transparent" />
     <div className="absolute right-7 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-cyan-400/25 to-transparent" />
 
-    {/* 10. Сканирующие полосы */}
+    {/* Сканирующие полосы */}
     <motion.div className="absolute top-0 h-px w-[28%] bg-gradient-to-r from-transparent via-purple-400/60 to-transparent blur-[0.5px]"
       animate={{ left: ['-35%', '135%'] }} transition={{ duration: 9, repeat: Infinity, ease: "linear", delay: 2 }} />
-    <motion.div className="absolute bottom-0 h-px w-[22%] bg-gradient-to-r from-transparent via-cyan-400/55 to-transparent blur-[0.5px]"
-      animate={{ left: ['135%', '-30%'] }} transition={{ duration: 11, repeat: Infinity, ease: "linear", delay: 6 }} />
 
-    {/* 11. Верхняя и нижняя неоновые линии */}
+    {/* Неоновые линии */}
     <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-purple-400/45 to-transparent" />
     <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent" />
 
-    {/* 12. Мягкие угловые свечения */}
+    {/* Мягкие угловые свечения */}
     <div className="absolute top-0 left-0 w-28 h-28 bg-purple-500/6 blur-[50px] rounded-br-full" />
     <div className="absolute top-0 right-0 w-28 h-28 bg-cyan-500/6 blur-[50px] rounded-bl-full" />
   </div>
@@ -440,7 +420,6 @@ const t = (key: string) => {
       backgroundSize: '110px 110px'
     }}
   />
-
   {/* ==================== ORIGINAL CONTENT (НЕ ТРОГАТЬ) ==================== */}
   <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex justify-between items-center relative z-10">
     <motion.h1
