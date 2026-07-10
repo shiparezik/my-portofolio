@@ -423,8 +423,8 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
     }}
   />
 
-{/* ==================== МОБИЛЬНЫЙ НАВБАР ==================== */}
-<div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
+{/* ==================== МОБИЛЬНЫЙ НАВБАР (только телефон) ==================== */}
+<div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10">
   <div className="flex items-center justify-around px-2 py-2.5">
     
     {/* Навигация */}
@@ -459,6 +459,70 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
   </div>
 </div>
 
+{/* ==================== ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ ==================== */}
+{isMenuOpen && (
+  <div className="md:hidden fixed inset-0 z-[90] bg-black/98 backdrop-blur-xl">
+    
+    {/* Шапка */}
+    <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
+      <div 
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setIsMenuOpen(false);
+        }}
+        className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
+      >
+        SHIPAREZIK
+      </div>
+      <button onClick={() => setIsMenuOpen(false)} className="text-4xl text-white/70">×</button>
+    </div>
+
+    {/* Навигация */}
+    <div className="px-6 py-2">
+      {[
+        { key: "nav.about", id: "about", icon: User },
+        { key: "nav.skills", id: "skills", icon: Code2 },
+        { key: "nav.projects", id: "projects", icon: Briefcase },
+        { key: "nav.contact", id: "contact", icon: Mail }
+      ].map((item) => (
+        <button
+          key={item.id}
+          onClick={() => scrollToSection(item.id)}
+          className="flex items-center gap-4 w-full py-5 text-left text-xl border-b border-white/10 active:bg-white/5"
+        >
+          <item.icon size={24} className="text-purple-400" />
+          {t(item.key)}
+        </button>
+      ))}
+    </div>
+
+    {/* Выбор языка */}
+    <div className="px-6 pt-8">
+      <div className="text-sm text-white/50 mb-3 px-1">Language</div>
+      <div className="grid grid-cols-2 gap-3">
+        {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
+          <button
+            key={lang}
+            onClick={() => {
+              changeLanguage(lang);
+              setIsMenuOpen(false);
+            }}
+            className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all
+              ${currentLang === lang 
+                ? 'bg-purple-500/20 border-purple-400 text-purple-300' 
+                : 'bg-zinc-900 border-white/10 hover:border-white/30'}`}
+          >
+            <span className="text-3xl">{languageFlags[lang]}</span>
+            <div>
+              <div className="font-medium">{languageNames[lang]}</div>
+              <div className="text-xs text-zinc-500">{lang.toUpperCase()}</div>
+            </div>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
+)}
 
   {/* ==================== ORIGINAL CONTENT (НЕ ТРОГАТЬ) ==================== */}
   <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex justify-between items-center relative z-10">
