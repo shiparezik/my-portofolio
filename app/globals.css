@@ -143,3 +143,23 @@ nav {
   color: #67e8f9;
   text-shadow: 0 0 10px #67e8f9;
 }
+
+/* ==================== МОБИЛЬНЫЕ СТИЛИ ==================== */
+@media (max-width: 768px) {
+  
+  /* Скрываем десктопный навбар на телефоне */
+  .desktop-navbar {
+    display: none !important;
+  }
+
+  /* Показываем мобильный навбар */
+  .mobile-navbar {
+    display: block !important;
+  }
+
+  /* Пример: уменьшаем высоту навбара на телефоне */
+  nav {
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+  }
+}

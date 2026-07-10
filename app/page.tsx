@@ -420,6 +420,73 @@ const t = (key: string) => {
       backgroundSize: '110px 110px'
     }}
   />
+
+{/* ==================== МОБИЛЬНЫЙ НАВБАР (только для телефона) ==================== */}
+<div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
+  <div className="flex items-center justify-around px-2 py-3">
+    
+    {/* Кнопки навигации */}
+    {[
+      { key: "nav.about", id: "about", icon: User },
+      { key: "nav.skills", id: "skills", icon: Code2 },
+      { key: "nav.projects", id: "projects", icon: Briefcase },
+      { key: "nav.contact", id: "contact", icon: Mail }
+    ].map((item) => (
+      <button
+        key={item.id}
+        onClick={() => scrollToSection(item.id)}
+        className="flex flex-col items-center gap-1 text-white/70 active:text-white"
+      >
+        <item.icon size={22} />
+        <span className="text-[10px] tracking-wider">{t(item.key)}</span>
+      </button>
+    ))}
+
+    {/* Кнопка Menu */}
+    <button 
+      onClick={() => setIsMenuOpen(!isMenuOpen)} 
+      className="flex flex-col items-center gap-1 text-white/70 active:text-white"
+    >
+      <div className="space-y-1">
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+      </div>
+      <span className="text-[10px]">Menu</span>
+    </button>
+  </div>
+</div>
+
+{/* ==================== МОБИЛЬНОЕ МЕНЮ ==================== */}
+{isMenuOpen && (
+  <div className="md:hidden fixed inset-0 z-[80] bg-black/95 backdrop-blur-xl">
+    <div className="flex justify-between items-center px-6 py-5 border-b border-white/10">
+      <div className="text-2xl font-black tracking-[-1px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent">
+        SHIPAREZIK
+      </div>
+      <button onClick={() => setIsMenuOpen(false)} className="text-4xl">×</button>
+    </div>
+
+    <div className="flex flex-col px-6 py-6 text-xl">
+      {[
+        { key: "nav.about", id: "about", icon: User },
+        { key: "nav.skills", id: "skills", icon: Code2 },
+        { key: "nav.projects", id: "projects", icon: Briefcase },
+        { key: "nav.contact", id: "contact", icon: Mail }
+      ].map((item) => (
+        <button
+          key={item.id}
+          onClick={() => scrollToSection(item.id)}
+          className="flex items-center gap-4 py-6 border-b border-white/10 text-left active:bg-white/5"
+        >
+          <item.icon size={24} className="text-purple-400" />
+          {t(item.key)}
+        </button>
+      ))}
+    </div>
+  </div>
+)}
+
   {/* ==================== ORIGINAL CONTENT (НЕ ТРОГАТЬ) ==================== */}
   <div className="max-w-7xl mx-auto px-6 md:px-8 py-5 flex justify-between items-center relative z-10">
     <motion.h1
