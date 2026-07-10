@@ -477,6 +477,40 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
   </div>
 </div>
 
+{/* ==================== МОБИЛЬНЫЙ НАВБАР (всегда на месте на телефоне) ==================== */}
+<div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
+  <div className="flex items-center justify-around px-2 py-2.5">
+    
+    {[
+      { key: "nav.about", id: "about", icon: User },
+      { key: "nav.skills", id: "skills", icon: Code2 },
+      { key: "nav.projects", id: "projects", icon: Briefcase },
+      { key: "nav.contact", id: "contact", icon: Mail }
+    ].map((item) => (
+      <button
+        key={item.id}
+        onClick={() => scrollToSection(item.id)}
+        className="flex flex-col items-center gap-0.5 px-4 py-1 text-white/70 active:text-white active:scale-95 transition-all"
+      >
+        <item.icon size={22} />
+        <span className="text-[10px] tracking-wider">{t(item.key)}</span>
+      </button>
+    ))}
+
+    <button 
+      onClick={() => setIsMenuOpen(!isMenuOpen)} 
+      className="flex flex-col items-center gap-0.5 px-4 py-1 text-white/70 active:text-white active:scale-95 transition-all"
+    >
+      <div className="space-y-1">
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+      </div>
+      <span className="text-[10px] tracking-wider">Menu</span>
+    </button>
+  </div>
+</div>
+
 {/* ==================== МОБИЛЬНОЕ МЕНЮ ==================== */}
 {isMenuOpen && (
   <div className="md:hidden fixed inset-0 z-[90] bg-black/98 backdrop-blur-xl">
@@ -658,11 +692,10 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
 
 {/* ==================== БОКОВОЙ ВЕРТИКАЛЬНЫЙ НАВБАР (ПРАВАЯ СТОРОНА) ==================== */}
 <motion.div
-  initial={{ x: 120, opacity: 0, scale: 0.9 }}
+initial={{ x: 120, opacity: 0 }}
   animate={{ 
     x: scrolledPastHero ? 0 : 120, 
-    opacity: scrolledPastHero ? 1 : 0,
-    scale: scrolledPastHero ? 1 : 0.9
+    opacity: scrolledPastHero ? 1 : 0 
   }}
   transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
   className="fixed right-6 top-1/2 -translate-y-1/2 z-[60] hidden lg:flex flex-col items-center 
@@ -737,94 +770,127 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
   </motion.button>
 </motion.div>
 
-      {/* ==================== HERO ==================== */}
-      <section className="hero relative flex justify-center items-center min-h-screen pt-20 overflow-visible">
-        <div className="absolute inset-0 bg-[radial-gradient(#4f46e520_1px,transparent_1px)] [background-size:40px_40px]" />
-        <div className="glow glow1 absolute top-[-40%] left-[-20%] w-[800px] h-[800px] bg-purple-500/25 rounded-full blur-[130px]" />
-        <div className="glow glow2 absolute bottom-[-30%] right-[-25%] w-[1000px] h-[1000px] bg-pink-500/25 rounded-full blur-[150px]" />
+{/* ==================== HERO ==================== */}
+<section className="hero relative flex justify-center items-center min-h-screen pt-16 md:pt-20 overflow-hidden px-4">
+  <div className="absolute inset-0 bg-[radial-gradient(#4f46e520_1px,transparent_1px)] [background-size:40px_40px]" />
+  
+  <div className="glow glow1 absolute top-[-40%] left-[-20%] w-[700px] h-[700px] bg-purple-500/20 rounded-full blur-[130px]" />
+  <div className="glow glow2 absolute bottom-[-30%] right-[-25%] w-[900px] h-[900px] bg-pink-500/20 rounded-full blur-[150px]" />
 
-        {/* Particles */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {Array.from({ length: 220 }).map((_, i) => {
-            const left = (i * 4.2) % 100;
-            const duration = 8 + (i % 30);
-            const isSpecial = i % 6 === 0;
-            return (
-              <motion.div key={i} className={`absolute w-[2.5px] h-[2.5px] rounded-full ${isSpecial ? 'bg-purple-400' : 'bg-white'}`} style={{ left: `${left}%`, top: `${(i * 7.8) % 100}%` }} animate={{ y: [0, -520, 0], x: [0, (i % 7 - 3) * 35, 0], opacity: [0.2, 1, 0.2], scale: [0.4, isSpecial ? 2.2 : 1.4, 0.4] }} transition={{ duration, repeat: Infinity, delay: i * -0.18 }} />
-            );
-          })}
-        </div>
+  {/* Плавающие звёзды (частицы) */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    {Array.from({ length: 120 }).map((_, i) => {
+      const left = (i * 4.2) % 100;
+      const duration = 7 + (i % 25);
+      const isSpecial = i % 7 === 0;
+      return (
+        <motion.div 
+          key={i} 
+          className={`absolute w-[2px] h-[2px] rounded-full ${isSpecial ? 'bg-purple-400' : 'bg-white'}`} 
+          style={{ left: `${left}%`, top: `${(i * 7.5) % 100}%` }} 
+          animate={{ 
+            y: [0, -400, 0], 
+            x: [0, (i % 5 - 2) * 25, 0], 
+            opacity: [0.15, 0.9, 0.15] 
+          }} 
+          transition={{ duration, repeat: Infinity, delay: i * -0.15 }} 
+        />
+      );
+    })}
+  </div>
 
-        {/* Floating Icons */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[
-            { Icon: Code2, left: '12%', top: '25%', delay: 0, color: '#a855f7' },
-            { Icon: Zap, left: '85%', top: '35%', delay: 1.2, color: '#ec4899' },
-            { Icon: Trophy, left: '18%', top: '68%', delay: 0.8, color: '#22d3ee' },
-            { Icon: Heart, left: '78%', top: '55%', delay: 2.1, color: '#f472b6' },
-            { Icon: Globe, left: '45%', top: '15%', delay: 3.4, color: '#c4b5fd' },
-          ].map(({ Icon, left, top, delay, color }, idx) => (
-            <motion.div key={idx} className="absolute" style={{ left, top }} animate={{ y: [0, -35, 0], rotate: [-12, 12, -12], scale: [0.85, 1.15, 0.85] }} transition={{ duration: 6.5, repeat: Infinity, delay }}>
-              <Icon size={42} style={{ color }} strokeWidth={1.6} />
-            </motion.div>
-          ))}
-        </div>
+  {/* Плавающие иконки (эмодзи) */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none hidden sm:block">
+    {[
+      { Icon: Code2, left: '14%', top: '28%', delay: 0, color: '#a855f7' },
+      { Icon: Zap, left: '82%', top: '38%', delay: 1.1, color: '#ec4899' },
+      { Icon: Trophy, left: '20%', top: '65%', delay: 0.7, color: '#22d3ee' },
+      { Icon: Heart, left: '75%', top: '58%', delay: 2.0, color: '#f472b6' },
+    ].map(({ Icon, left, top, delay, color }, idx) => (
+      <motion.div 
+        key={idx} 
+        className="absolute" 
+        style={{ left, top }} 
+        animate={{ 
+          y: [0, -30, 0], 
+          rotate: [-8, 8, -8], 
+          scale: [0.9, 1.1, 0.9] 
+        }} 
+        transition={{ duration: 5.5, repeat: Infinity, delay }}
+      >
+        <Icon size={36} style={{ color }} strokeWidth={1.5} />
+      </motion.div>
+    ))}
+  </div>
 
-        <div className="relative z-10 text-center px-6 max-w-5xl mx-auto">
-          <motion.p initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} className="text-xl md:text-2xl text-zinc-400 tracking-[6px] font-light flex items-center justify-center gap-3">
-            <Sparkles size={35} className="text-purple-400 animate-pulse bg-clip-text" /> {t('hero.greeting')}
-          </motion.p>
+  <div className="relative z-10 text-center max-w-4xl mx-auto">
+    
+    <motion.p 
+      initial={{ opacity: 0, y: 30 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      className="text-lg md:text-2xl text-zinc-400 tracking-[3px] md:tracking-[5px] font-light flex items-center justify-center gap-2 mb-2"
+    >
+      <Sparkles size={24} className="text-purple-400" /> {t('hero.greeting')}
+    </motion.p>
 
-          <motion.h1 
-            initial={{ opacity: 0, scale: 0.75, y: 60 }} 
-            animate={{ 
-              opacity: 1, 
-              scale: 1, 
-              y: 0,
-              backgroundPosition: ["0% 50%", "200% 50%", "0% 50%"]
-            }} 
-            transition={{ 
-              type: "spring", 
-              stiffness: 90, 
-              damping: 14,
-              backgroundPosition: {
-                duration: 5,
-                repeat: Infinity,
-                ease: "linear"
-              }
-            }} 
-            className="text-[5.8rem] md:text-[9.2rem] leading-[0.85] font-black tracking-[-6px] my-4 
-                      bg-[length:300%_100%] bg-gradient-to-r from-purple-400 via-cyan-800 via-pink-500 to-purple-400 
-                      bg-clip-text text-transparent"
-          >
-            {t('hero.name')}
-          </motion.h1>
+    <motion.h1 
+      initial={{ opacity: 0, scale: 0.9, y: 40 }} 
+      animate={{ opacity: 1, scale: 1, y: 0 }} 
+      transition={{ type: "spring", stiffness: 80, damping: 16 }}
+      className="text-[3.1rem] sm:text-[4.3rem] md:text-[6.8rem] lg:text-[8.5rem] leading-[0.9] font-black tracking-[-3.5px] md:tracking-[-6px] my-2 
+                 bg-gradient-to-r from-purple-400 via-cyan-400 to-pink-500 bg-clip-text text-transparent"
+    >
+      {t('hero.name')}
+    </motion.h1>
 
-          <motion.h2 initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.35 }} className="text-4xl md:text-6xl font-light text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 mb-8 flex items-center justify-center gap-4">
-            <Zap className="inline" /> {t('hero.role')}
-          </motion.h2>
+    <motion.h2 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      transition={{ delay: 0.2 }} 
+      className="text-2xl sm:text-3xl md:text-5xl font-light text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-400 to-cyan-400 mb-4 md:mb-5 flex items-center justify-center gap-2"
+    >
+      <Zap className="inline w-6 h-6 md:w-8 md:h-8" /> {t('hero.role')}
+    </motion.h2>
 
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.65 }} className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            {t('hero.description')}
-          </motion.div>
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }} 
+      animate={{ opacity: 1, y: 0 }} 
+      transition={{ delay: 0.35 }} 
+      className="text-base md:text-xl text-zinc-400 max-w-[620px] mx-auto leading-relaxed px-2"
+    >
+      {t('hero.description')}
+    </motion.div>
 
-          <div className="mt-16 flex flex-col sm:flex-row gap-5 justify-center">
-            <motion.button whileHover={{ scale: 1.06, boxShadow: "0 25px 50px -12px rgb(168 85 247 / 0.5)" }} whileTap={{ scale: 0.97 }} onClick={() => scrollToSection('projects')} className="px-12 py-6 text-lg font-semibold rounded-3xl bg-gradient-to-r from-purple-600 to-pink-600 shadow-xl shadow-purple-500/50 flex items-center gap-3 group relative overflow-hidden">
-              <span className="relative z-10">Explore Projects</span>
-              <ExternalLink className="group-hover:rotate-45 transition relative z-10" />
-              <div className="absolute inset-0 bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform" />
-            </motion.button>
+    <div className="mt-8 md:mt-12 flex flex-col sm:flex-row gap-4 justify-center">
+      <motion.button 
+        whileHover={{ scale: 1.03 }} 
+        whileTap={{ scale: 0.97 }} 
+        onClick={() => scrollToSection('projects')} 
+        className="px-8 py-4 text-base md:text-lg font-semibold rounded-3xl bg-gradient-to-r from-purple-600 to-pink-600 shadow-xl shadow-purple-500/50 flex items-center justify-center gap-3"
+      >
+        Explore Projects <ExternalLink className="w-5 h-5" />
+      </motion.button>
 
-            <motion.button whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }} onClick={() => scrollToSection('about')} className="px-12 py-6 text-lg rounded-3xl border border-white/30 hover:border-white/70 transition-all flex items-center gap-3">
-              <User className="w-5 h-5" /> {t('about.title')}
-            </motion.button>
-          </div>
-        </div>
+      <motion.button 
+        whileHover={{ scale: 1.02 }} 
+        whileTap={{ scale: 0.97 }} 
+        onClick={() => scrollToSection('about')} 
+        className="px-8 py-4 text-base md:text-lg rounded-3xl border border-white/30 hover:border-white/70 transition-all flex items-center justify-center gap-3"
+      >
+        <User className="w-5 h-5" /> {t('about.title')}
+      </motion.button>
+    </div>
+  </div>
 
-        <motion.div animate={{ y: [0, 28, 0] }} transition={{ repeat: Infinity, duration: 2.6 }} className="absolute bottom-12 left-1/2 -translate-x-1/2 text-purple-400/70">
-          <ArrowDown size={48} strokeWidth={1.4} />
-        </motion.div>
-      </section>
+  <motion.div 
+    animate={{ y: [0, 20, 0] }} 
+    transition={{ repeat: Infinity, duration: 2.2 }} 
+    className="absolute bottom-8 left-1/2 -translate-x-1/2 text-purple-400/70"
+  >
+    <ArrowDown size={38} strokeWidth={1.8} />
+  </motion.div>
+</section>
+
  {/* ==================== ABOUT ==================== */}
 <section id="about" className="py-28 md:py-40 border-t border-white/10 relative">
   <div className="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
