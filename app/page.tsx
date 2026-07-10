@@ -329,8 +329,8 @@ const t = (key: string) => {
     opacity: scrolledPastHero ? 0 : 1 
   }}
   transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-  className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-white/10 
-             bg-black/70 backdrop-blur-[26px] backdrop-saturate-150 
+className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-white/10 
+             bg-black/80 backdrop-blur-[26px] backdrop-saturate-150 
              shadow-[0_18px_80px_-25px_rgb(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(168,85,247,0.2)]
              rounded-br-[3rem] rounded-bl-[3rem]"
 >

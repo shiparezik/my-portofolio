@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  
   title: "shiparezik | portofolio",
   description: " Shiparezik - 17 y.o. Full Stack Developer from Poland. React, Next.js, C#, Python and more.",
   icons: {
@@ -30,9 +31,9 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased overflow-x-hidden`}
     >
-      <body className="min-h-full flex flex-col bg-black text-white">
+      <body className="overflow-x-hidden min-h-full flex flex-col bg-black text-white">
         {children}
       </body>
     </html>
