@@ -334,7 +334,7 @@ const t = (key: string) => {
              shadow-[0_18px_80px_-25px_rgb(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(168,85,247,0.2)]
              rounded-br-[3rem] rounded-bl-[3rem]"
 >
-  {/* === ФОН (теперь с overflow-hidden, чтобы не вылезал за скругления) === */}
+  {/* === ФОН (с правильным ограничением) === */}
   <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-br-[3rem] rounded-bl-[3rem]">
 
     {/* Глубокий космос */}
@@ -422,11 +422,60 @@ const t = (key: string) => {
     }}
   />
 
-{/* ==================== МОБИЛЬНЫЙ НИЖНИЙ НАВБАР ==================== */}
+{/* ==================== МОБИЛЬНЫЙ НАВБАР (2 ЯРУСА) ==================== */}
 <div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
-  <div className="flex items-center justify-around px-1 py-2.5">
-    
-    {/* Навигационные кнопки */}
+
+  {/* Верхний ярус: Логотип + Язык + Меню */}
+  <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
+    <div 
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="text-xl font-black tracking-[-1px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent"
+    >
+      SHIPAREZIK
+    </div>
+
+    <div className="flex items-center gap-2">
+      {/* Language Switcher (простой) */}
+      <div className="relative group">
+        <button 
+          onClick={() => setIsLangOpen(!isLangOpen)}
+          className="px-3 py-1.5 text-sm border border-white/20 rounded-full"
+        >
+          {languageFlags[currentLang]}
+        </button>
+
+        {isLangOpen && (
+          <div className="absolute bottom-full right-0 mb-2 w-48 bg-zinc-900 border border-white/10 rounded-2xl shadow-xl py-1 z-[999]">
+            {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
+              <button
+                key={lang}
+                onClick={() => {
+                  changeLanguage(lang);
+                  setIsLangOpen(false);
+                }}
+                className={`w-full text-left px-4 py-2.5 flex items-center gap-3 text-sm ${currentLang === lang ? 'text-purple-400' : ''}`}
+              >
+                <span>{languageFlags[lang]}</span>
+                <span className="text-zinc-400 text-xs">{languageNames[lang]}</span>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Кнопка Menu */}
+      <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
+        <div className="space-y-1">
+          <div className="w-5 h-0.5 bg-white" />
+          <div className="w-5 h-0.5 bg-white" />
+          <div className="w-5 h-0.5 bg-white" />
+        </div>
+      </button>
+    </div>
+  </div>
+
+  {/* Нижний ярус: Навигация */}
+  <div className="flex items-center justify-around px-1 py-2">
     {[
       { key: "nav.about", id: "about", icon: User },
       { key: "nav.skills", id: "skills", icon: Code2 },
@@ -436,25 +485,12 @@ const t = (key: string) => {
       <button
         key={item.id}
         onClick={() => scrollToSection(item.id)}
-        className="flex flex-col items-center gap-1 px-3 py-1 text-white/70 active:text-white active:scale-95 transition-all"
+        className="flex flex-col items-center gap-0.5 px-3 py-1 text-white/70 active:text-white"
       >
-        <item.icon size={22} />
-        <span className="text-[10px] tracking-wider">{t(item.key)}</span>
+        <item.icon size={20} />
+        <span className="text-[9px] tracking-wider">{t(item.key)}</span>
       </button>
     ))}
-
-    {/* Кнопка Menu */}
-    <button 
-      onClick={() => setIsMenuOpen(!isMenuOpen)} 
-      className="flex flex-col items-center gap-1 px-3 py-1 text-white/70 active:text-white active:scale-95 transition-all"
-    >
-      <div className="space-y-1">
-        <div className="w-5 h-0.5 bg-white" />
-        <div className="w-5 h-0.5 bg-white" />
-        <div className="w-5 h-0.5 bg-white" />
-      </div>
-      <span className="text-[10px] tracking-wider">Menu</span>
-    </button>
   </div>
 </div>
 
