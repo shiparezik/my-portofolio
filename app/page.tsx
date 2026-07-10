@@ -882,6 +882,8 @@ initial={{ x: 120, opacity: 0 }}
     </div>
   </div>
 
+  {/* Анимированная стрелка вниз */}
+
   <motion.div 
     animate={{ y: [0, 20, 0] }} 
     transition={{ repeat: Infinity, duration: 2.2 }} 
