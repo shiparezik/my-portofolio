@@ -477,10 +477,11 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
   </div>
 </div>
 
-{/* ==================== МОБИЛЬНЫЙ НАВБАР (всегда на месте на телефоне) ==================== */}
-<div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
+{/* ==================== МОБИЛЬНЫЙ НАВБАР (телефон) ==================== */}
+<div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10">
   <div className="flex items-center justify-around px-2 py-2.5">
     
+    {/* Навигация */}
     {[
       { key: "nav.about", id: "about", icon: User },
       { key: "nav.skills", id: "skills", icon: Code2 },
@@ -497,6 +498,7 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       </button>
     ))}
 
+    {/* Кнопка Menu */}
     <button 
       onClick={() => setIsMenuOpen(!isMenuOpen)} 
       className="flex flex-col items-center gap-0.5 px-4 py-1 text-white/70 active:text-white active:scale-95 transition-all"
@@ -511,16 +513,25 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
   </div>
 </div>
 
-{/* ==================== МОБИЛЬНОЕ МЕНЮ ==================== */}
+{/* ==================== ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ ==================== */}
 {isMenuOpen && (
-  <div className="md:hidden fixed inset-0 z-[90] bg-black/98 backdrop-blur-xl">
+  <div className="md:hidden fixed inset-0 z-[90] bg-black/97 backdrop-blur-2xl">
+    
+    {/* Шапка */}
     <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
-      <div className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent">
+      <div 
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setIsMenuOpen(false);
+        }}
+        className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
+      >
         SHIPAREZIK
       </div>
       <button onClick={() => setIsMenuOpen(false)} className="text-4xl text-white/70">×</button>
     </div>
 
+    {/* Навигация */}
     <div className="px-6 py-2">
       {[
         { key: "nav.about", id: "about", icon: User },
@@ -539,7 +550,7 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       ))}
     </div>
 
-    {/* Выбор языка в меню */}
+    {/* Выбор языка */}
     <div className="px-6 pt-8">
       <div className="text-sm text-white/50 mb-3 px-1">Language</div>
       <div className="grid grid-cols-2 gap-3">
