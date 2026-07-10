@@ -422,60 +422,12 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
     }}
   />
 
-{/* ==================== МОБИЛЬНЫЙ НАВБАР (2 ЯРУСА) ==================== */}
+{/* ==================== МОБИЛЬНЫЙ НАВБАР ==================== */}
 <div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
 
-  {/* Верхний ярус: Логотип + Язык + Меню */}
-  <div className="flex items-center justify-between px-4 py-2.5 border-b border-white/10">
-    <div 
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      className="text-xl font-black tracking-[-1px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent"
-    >
-      SHIPAREZIK
-    </div>
-
-    <div className="flex items-center gap-2">
-      {/* Language Switcher (простой) */}
-      <div className="relative group">
-        <button 
-          onClick={() => setIsLangOpen(!isLangOpen)}
-          className="px-3 py-1.5 text-sm border border-white/20 rounded-full"
-        >
-          {languageFlags[currentLang]}
-        </button>
-
-        {isLangOpen && (
-          <div className="absolute bottom-full right-0 mb-2 w-48 bg-zinc-900 border border-white/10 rounded-2xl shadow-xl py-1 z-[999]">
-            {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
-              <button
-                key={lang}
-                onClick={() => {
-                  changeLanguage(lang);
-                  setIsLangOpen(false);
-                }}
-                className={`w-full text-left px-4 py-2.5 flex items-center gap-3 text-sm ${currentLang === lang ? 'text-purple-400' : ''}`}
-              >
-                <span>{languageFlags[lang]}</span>
-                <span className="text-zinc-400 text-xs">{languageNames[lang]}</span>
-              </button>
-            ))}
-          </div>
-        )}
-      </div>
-
-      {/* Кнопка Menu */}
-      <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
-        <div className="space-y-1">
-          <div className="w-5 h-0.5 bg-white" />
-          <div className="w-5 h-0.5 bg-white" />
-          <div className="w-5 h-0.5 bg-white" />
-        </div>
-      </button>
-    </div>
-  </div>
-
-  {/* Нижний ярус: Навигация */}
-  <div className="flex items-center justify-around px-1 py-2">
+  <div className="flex items-center justify-around px-2 py-2.5">
+    
+    {/* Навигация */}
     {[
       { key: "nav.about", id: "about", icon: User },
       { key: "nav.skills", id: "skills", icon: Code2 },
@@ -485,12 +437,25 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       <button
         key={item.id}
         onClick={() => scrollToSection(item.id)}
-        className="flex flex-col items-center gap-0.5 px-3 py-1 text-white/70 active:text-white"
+        className="flex flex-col items-center gap-0.5 px-4 py-1 text-white/70 active:text-white active:scale-95 transition-all"
       >
-        <item.icon size={20} />
-        <span className="text-[9px] tracking-wider">{t(item.key)}</span>
+        <item.icon size={22} />
+        <span className="text-[10px] tracking-wider">{t(item.key)}</span>
       </button>
     ))}
+
+    {/* Кнопка Menu */}
+    <button 
+      onClick={() => setIsMenuOpen(!isMenuOpen)} 
+      className="flex flex-col items-center gap-0.5 px-4 py-1 text-white/70 active:text-white active:scale-95 transition-all"
+    >
+      <div className="space-y-1">
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+        <div className="w-5 h-0.5 bg-white" />
+      </div>
+      <span className="text-[10px] tracking-wider">Menu</span>
+    </button>
   </div>
 </div>
 
@@ -500,29 +465,30 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
     
     {/* Шапка */}
     <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
-      <div className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent">
+      <div 
+        onClick={() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          setIsMenuOpen(false);
+        }}
+        className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
+      >
         SHIPAREZIK
       </div>
-      <button 
-        onClick={() => setIsMenuOpen(false)} 
-        className="text-white/70 hover:text-white text-4xl leading-none"
-      >
-        ×
-      </button>
+      <button onClick={() => setIsMenuOpen(false)} className="text-white/70 hover:text-white text-4xl">×</button>
     </div>
 
     {/* Навигация */}
-    <div className="px-6 py-4">
+    <div className="px-6 py-2">
       {[
         { key: "nav.about", id: "about", icon: User },
         { key: "nav.skills", id: "skills", icon: Code2 },
         { key: "nav.projects", id: "projects", icon: Briefcase },
         { key: "nav.contact", id: "contact", icon: Mail }
-      ].map((item, index) => (
+      ].map((item) => (
         <button
           key={item.id}
           onClick={() => scrollToSection(item.id)}
-          className="flex items-center gap-4 w-full py-5 text-left text-xl border-b border-white/10 active:bg-white/5 transition-colors"
+          className="flex items-center gap-4 w-full py-5 text-left text-xl border-b border-white/10 active:bg-white/5"
         >
           <item.icon size={24} className="text-purple-400" />
           {t(item.key)}
@@ -531,9 +497,8 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
     </div>
 
     {/* ==================== ВЫБОР ЯЗЫКА ==================== */}
-    <div className="px-6 pt-6">
-      <div className="text-sm text-white/50 mb-3 px-1">Language / Язык</div>
-      
+    <div className="px-6 pt-8">
+      <div className="text-sm text-white/50 mb-3 px-1">Language</div>
       <div className="grid grid-cols-2 gap-3">
         {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
           <button
@@ -542,13 +507,13 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
               changeLanguage(lang);
               setIsMenuOpen(false);
             }}
-            className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all active:scale-[0.985]
+            className={`flex items-center gap-3 px-4 py-3.5 rounded-2xl border transition-all
               ${currentLang === lang 
                 ? 'bg-purple-500/20 border-purple-400 text-purple-300' 
                 : 'bg-zinc-900 border-white/10 hover:border-white/30'}`}
           >
             <span className="text-3xl">{languageFlags[lang]}</span>
-            <div className="text-left">
+            <div>
               <div className="font-medium">{languageNames[lang]}</div>
               <div className="text-xs text-zinc-500">{lang.toUpperCase()}</div>
             </div>
