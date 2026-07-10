@@ -423,11 +423,42 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
     }}
   />
 
-{/* ==================== МОБИЛЬНЫЙ НАВБАР (только телефон) ==================== */}
-<div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10">
-  <div className="flex items-center justify-around px-2 py-2.5">
+{/* ==================== МОБИЛЬНЫЙ НАВБАР (2 ЯРУСА) ==================== */}
+<div className="md:hidden fixed bottom-0 left-0 right-0 z-[70] bg-black/95 backdrop-blur-xl border-t border-white/10">
+
+  {/* Верхний ярус */}
+  <div className="flex items-center justify-between px-4 py-2 border-b border-white/10">
     
-    {/* Навигация */}
+    {/* Логотип */}
+    <div 
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+      className="text-xl font-black tracking-[-1px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
+    >
+      SHIPAREZIK
+    </div>
+
+    <div className="flex items-center gap-3">
+      {/* Language Switcher */}
+      <button 
+        onClick={() => setIsLangOpen(!isLangOpen)}
+        className="px-3 py-1 text-sm border border-white/20 rounded-full"
+      >
+        {languageFlags[currentLang]}
+      </button>
+
+      {/* Кнопка Menu */}
+      <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="p-2">
+        <div className="space-y-1">
+          <div className="w-5 h-0.5 bg-white" />
+          <div className="w-5 h-0.5 bg-white" />
+          <div className="w-5 h-0.5 bg-white" />
+        </div>
+      </button>
+    </div>
+  </div>
+
+  {/* Нижний ярус (навигация) */}
+  <div className="flex items-center justify-around px-2 py-2">
     {[
       { key: "nav.about", id: "about", icon: User },
       { key: "nav.skills", id: "skills", icon: Code2 },
@@ -437,47 +468,25 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       <button
         key={item.id}
         onClick={() => scrollToSection(item.id)}
-        className="flex flex-col items-center gap-0.5 px-4 py-1 text-white/70 active:text-white active:scale-95 transition-all"
+        className="flex flex-col items-center gap-0.5 px-3 py-1 text-white/70 active:text-white active:scale-95"
       >
-        <item.icon size={22} />
+        <item.icon size={20} />
         <span className="text-[10px] tracking-wider">{t(item.key)}</span>
       </button>
     ))}
-
-    {/* Кнопка Menu */}
-    <button 
-      onClick={() => setIsMenuOpen(!isMenuOpen)} 
-      className="flex flex-col items-center gap-0.5 px-4 py-1 text-white/70 active:text-white active:scale-95 transition-all"
-    >
-      <div className="space-y-1">
-        <div className="w-5 h-0.5 bg-white" />
-        <div className="w-5 h-0.5 bg-white" />
-        <div className="w-5 h-0.5 bg-white" />
-      </div>
-      <span className="text-[10px] tracking-wider">Menu</span>
-    </button>
   </div>
 </div>
 
-{/* ==================== ПОЛНОЭКРАННОЕ МОБИЛЬНОЕ МЕНЮ ==================== */}
+{/* ==================== МОБИЛЬНОЕ МЕНЮ ==================== */}
 {isMenuOpen && (
   <div className="md:hidden fixed inset-0 z-[90] bg-black/98 backdrop-blur-xl">
-    
-    {/* Шапка */}
     <div className="flex justify-between items-center px-6 py-6 border-b border-white/10">
-      <div 
-        onClick={() => {
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-          setIsMenuOpen(false);
-        }}
-        className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent cursor-pointer"
-      >
+      <div className="text-3xl font-black tracking-[-1.5px] bg-gradient-to-r from-white via-purple-400 to-pink-500 bg-clip-text text-transparent">
         SHIPAREZIK
       </div>
       <button onClick={() => setIsMenuOpen(false)} className="text-4xl text-white/70">×</button>
     </div>
 
-    {/* Навигация */}
     <div className="px-6 py-2">
       {[
         { key: "nav.about", id: "about", icon: User },
@@ -496,7 +505,7 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       ))}
     </div>
 
-    {/* Выбор языка */}
+    {/* Выбор языка в меню */}
     <div className="px-6 pt-8">
       <div className="text-sm text-white/50 mb-3 px-1">Language</div>
       <div className="grid grid-cols-2 gap-3">
