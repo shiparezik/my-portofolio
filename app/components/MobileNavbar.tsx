@@ -21,10 +21,11 @@ export default function MobileNavbar({
   languageNames,
 }: MobileNavbarProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLangOpen, setIsLangOpen] = useState(false);
 
   return (
     <>
-      {/* Нижний навбар (только телефон) */}
+      {/* Нижний навбар только для телефона */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-[80] bg-black/95 backdrop-blur-xl border-t border-white/10">
         <div className="flex items-center justify-around px-2 py-2">
           {[
@@ -43,6 +44,16 @@ export default function MobileNavbar({
             </button>
           ))}
 
+          {/* Кнопка Язык */}
+          <button 
+            onClick={() => setIsLangOpen(!isLangOpen)} 
+            className="flex flex-col items-center gap-0.5 px-3 py-1 text-white/70 active:text-white"
+          >
+            <span className="text-xl">{languageFlags[currentLang]}</span>
+            <span className="text-[9px] tracking-wider">Lang</span>
+          </button>
+
+          {/* Кнопка Menu */}
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)} 
             className="flex flex-col items-center gap-0.5 px-3 py-1 text-white/70 active:text-white"
@@ -57,7 +68,38 @@ export default function MobileNavbar({
         </div>
       </div>
 
-      {/* Полноэкранное меню (компактное) */}
+      {/* Меню языков (открывается по кнопке Lang) */}
+      {isLangOpen && (
+        <div className="md:hidden fixed inset-0 z-[95] bg-black/95 flex items-center justify-center p-4">
+          <div className="w-full max-w-xs bg-zinc-900 rounded-3xl p-5 border border-white/10">
+            <div className="flex justify-between mb-4">
+              <div className="font-semibold">Language</div>
+              <button onClick={() => setIsLangOpen(false)} className="text-2xl">×</button>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
+                <button
+                  key={lang}
+                  onClick={() => {
+                    changeLanguage(lang);
+                    setIsLangOpen(false);
+                  }}
+                  className={`flex items-center gap-3 px-4 py-3 rounded-2xl border text-left
+                    ${currentLang === lang 
+                      ? 'bg-purple-500/20 border-purple-400' 
+                      : 'bg-zinc-800 border-white/10'}`}
+                >
+                  <span className="text-2xl">{languageFlags[lang]}</span>
+                  <span>{languageNames[lang]}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Основное меню */}
       {isMenuOpen && (
         <div className="md:hidden fixed inset-0 z-[95] bg-black flex flex-col">
           <div className="flex justify-between items-center px-5 pt-10 pb-4 border-b border-white/10">
@@ -86,38 +128,6 @@ export default function MobileNavbar({
                 {t(item.key)}
               </button>
             ))}
-          </div>
-
-          {/* Язык + Контакты */}
-          <div className="px-5 pb-8 pt-4 border-t border-white/10">
-            <div className="text-xs text-white/50 mb-2">Language</div>
-            <div className="grid grid-cols-2 gap-2 mb-4">
-              {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
-                <button
-                  key={lang}
-                  onClick={() => { changeLanguage(lang); setIsMenuOpen(false); }}
-                  className={`px-3 py-2 rounded-lg border text-sm flex items-center gap-2 ${currentLang === lang ? 'bg-purple-500/20 border-purple-400' : 'bg-zinc-900 border-white/10'}`}
-                >
-                  {languageFlags[lang]} {languageNames[lang]}
-                </button>
-              ))}
-            </div>
-
-            <button 
-              onClick={() => { scrollToSection('contact'); setIsMenuOpen(false); }}
-              className="w-full py-3 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold mb-3"
-            >
-                <div className="hidden md:flex gap-10 text-lg font-medium">
-
-                    {t('contact.title')}
-
-                </div>
-            </button>
-
-            <div className="flex justify-center gap-5 text-sm text-white/50">
-              <a href="https://github.com/shiparez" target="_blank">GitHub</a>
-              <a href="https://t.me/shiparez" target="_blank">Telegram</a>
-            </div>
           </div>
         </div>
       )}
