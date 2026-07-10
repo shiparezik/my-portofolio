@@ -55,7 +55,7 @@
   "contact": {
     "title": "Давай Створимо Щось Круте Разом",
     "subtitle": "Є цікава ідея або просто хочеш поговорити про тех?",
-    "emailBtn": "Напиши мені на email"
+    "emailBtn": "Напиши мені"
   },
   "footer": "© 2026 Shiparezik • Зроблено з Next.js, Framer Motion & Пристрасті"
 }
