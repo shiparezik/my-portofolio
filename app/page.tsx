@@ -1,7 +1,7 @@
 'use client';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowDown, ExternalLink, Calendar, MapPin, Sparkles, User, Code2, Briefcase, Mail, Star, Heart, Zap, Trophy, Globe, Languages } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, memo } from 'react';
 import MobileNavbar from './components/MobileNavbar';
 
 // ==================== LANGUAGE CONFIG ====================
@@ -42,35 +42,50 @@ interface ProjectCardProps {
 
 // ==================== COMPONENTS ====================
 
-function SkillCategory({ title, color, techs, icon: Icon, t }: SkillCategoryProps) {
+// =================== SKILL CATEGORY ====================
+
+const SkillCategory = memo(function SkillCategory({ 
+  title, 
+  color, 
+  techs, 
+  icon: Icon, 
+  t 
+}: SkillCategoryProps) {
   return (
     <div className="relative rounded-3xl p-12 md:p-16 border border-white/10 bg-black/70 overflow-visible">
-      <MatrixRain color={color} density={110} />
-     
+      <MatrixRain color={color} density={45} />
+
       <div className="flex justify-center items-center gap-4 mb-16">
         {Icon && <Icon size={52} style={{ color }} />}
-        <h3 className="text-5xl md:text-6xl font-black tracking-widest " style={{ color }}>
+        <h3 className="text-5xl md:text-6xl font-black tracking-widest" style={{ color }}>
           {title}
         </h3>
       </div>
-     
+
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 relative z-10">
         {techs.map((tech, i) => (
-          <motion.div 
-            key={tech.key} 
-            initial={{ opacity: 0, y: 50 }} 
-            whileInView={{ opacity: 1, y: 0 }} 
-            transition={{ delay: i * 0.035 }} 
+          <motion.div
+            key={tech.key}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ delay: i * 0.03, duration: 0.45 }}
             className="group/item relative"
           >
-            <motion.div 
-              whileHover={{ scale: 1.12, y: -12, rotate: 2 }} 
+            <motion.div
+              whileHover={{ 
+                scale: 1.1, 
+                y: -10, 
+                rotate: 1.5,
+                transition: { type: "spring", stiffness: 320, damping: 18 }
+              }}
               className="px-8 py-7 bg-zinc-900/90 border border-white/10 rounded-2xl text-center text-xl font-medium hover:border-white/50 cursor-pointer h-full flex items-center justify-center relative overflow-hidden"
             >
               <span className="relative z-10">{tech.name}</span>
               <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover/item:opacity-100 transition" />
             </motion.div>
 
+            {/* Tooltip */}
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-6 opacity-0 group-hover/item:opacity-100 pointer-events-none transition-all duration-300 scale-90 group-hover/item:scale-100 w-80 z-[100]">
               <div className="bg-zinc-950 border border-white/20 p-7 rounded-3xl shadow-2xl shadow-black/80 backdrop-blur-xl relative">
                 <div className="font-bold text-2xl mb-4 flex items-center gap-3" style={{ color }}>
@@ -90,59 +105,70 @@ function SkillCategory({ title, color, techs, icon: Icon, t }: SkillCategoryProp
       </div>
     </div>
   );
-}
+});
+// ==================== MATRIX RAIN EFFECT ====================
 
 function MatrixRain({ color = "#a855f7", density = 200 }: { color?: string; density?: number }) {
   const [particles, setParticles] = useState<any[]>([]);
 
   useEffect(() => {
-    const newParticles = Array.from({ length: density }).map((_, i) => ({
-      id: i,
-      left: Math.random() * 102,
-      fontSize: 8 + Math.random() * 8,
-      opacity: 0.25 + Math.random() * 0.55,
-      duration: 4.5 + Math.random() * 13,
-      delay: Math.random() * -65,
-      symbolsCount: 25 + Math.floor(Math.random() * 35),
-    }));
+    const symbols = "01アイウエオカキクケコΣΔΨΩΛΠΘ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюя!@#$%^&*()_+-=[]{}|;:,.<>?";
+
+    const newParticles = Array.from({ length: density }).map((_, i) => {
+      const count = 18 + Math.floor(Math.random() * 20); 
+      let text = '';
+      for (let j = 0; j < count; j++) {
+        text += symbols[Math.floor(Math.random() * symbols.length)] + '\n';
+      }
+
+      return {
+        id: i,
+        left: Math.random() * 102,
+        fontSize: 8 + Math.random() * 7,
+        opacity: 0.22 + Math.random() * 0.48,
+        duration: 5.2 + Math.random() * 10.5,
+        delay: Math.random() * -50,
+        text, 
+      };
+    });
+
     setParticles(newParticles);
   }, [density]);
-
-  const symbols = "01アイウエオカキクケコΣΔΨΩΛΠΘ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюя!@#$%^&*()_+-=[]{}|;:,.<>?";
 
   return (
     <div className="absolute inset-0 overflow-hidden opacity-25 pointer-events-none font-mono text-[9px] select-none z-0">
       {particles.map((p) => (
         <motion.div
           key={p.id}
-          className="absolute whitespace-pre leading-none"
-          style={{ 
-            left: `${p.left}%`, 
-            top: '-280px', 
-            color, 
-            fontSize: `${p.fontSize}px`, 
-            opacity: p.opacity 
+          className="absolute whitespace-pre leading-[0.82]"
+          style={{
+            left: `${p.left}%`,
+            top: '-280px',
+            color,
+            fontSize: `${p.fontSize}px`,
+            opacity: p.opacity,
           }}
-          animate={{ y: ['-280px', '220vh'], opacity: [0.08, 0.85, 0.08] }}
-          transition={{ duration: p.duration, repeat: Infinity, delay: p.delay, ease: "linear" }}
+          animate={{ y: ['-280px', '220vh'] }}
+          transition={{
+            duration: p.duration,
+            repeat: Infinity,
+            delay: p.delay,
+            ease: 'linear',
+          }}
         >
-          {Array.from({ length: p.symbolsCount }).map((_, j) => (
-            <div key={j} style={{ lineHeight: "0.78" }}>
-              {symbols[Math.floor(Math.random() * symbols.length)]}
-            </div>
-          ))}
+          {p.text}
         </motion.div>
       ))}
     </div>
   );
 }
 
-{/* ==================== LOADING SCREEN ==================== */}
+// =================== LOADING SCREEN ====================
 
 function LoadingScreen() {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
-      <MatrixRain color="#c084fc" density={150} />
+      <MatrixRain color="#c084fc" density={38} />
 
       <div className="relative z-10 flex flex-col items-center px-6">
         {/* Колесико 3 цвета */}
@@ -162,7 +188,7 @@ function LoadingScreen() {
           INITIALIZING SYSTEM
         </div>
 
-        {/* Прогресс-бар (заполняется один раз) */}
+        {/* Прогресс-бар */}
         <div className="w-[280px]">
           <div className="relative h-[2px] bg-white/10 rounded-full overflow-hidden">
             <motion.div
@@ -187,8 +213,14 @@ function LoadingScreen() {
   );
 }
 
-{/* ==================== PROJECT CARD ==================== */}
-function ProjectCard({ title, description, tags, icon: Icon }: ProjectCardProps) {
+// ==================== PROJECT CARD ==================== 
+
+const ProjectCard = memo(function ProjectCard({ 
+  title, 
+  description, 
+  tags, 
+  icon: Icon 
+}: ProjectCardProps) {
   return (
     <motion.div
       className="group relative bg-zinc-900 rounded-3xl overflow-hidden border border-white/10 h-full flex flex-col hover:border-purple-500/70"
@@ -201,38 +233,62 @@ function ProjectCard({ title, description, tags, icon: Icon }: ProjectCardProps)
     >
       <div className="relative h-80 bg-zinc-950 overflow-hidden flex items-center justify-center">
         <div className="absolute inset-0">
-          {Array.from({ length: 65 }).map((_, i) => (
+          {Array.from({ length: 20 }).map((_, i) => (
             <motion.div
               key={i}
-              className="absolute w-[3px] h-[3px] bg-white/40 rounded-full"
-              style={{ left: `${(i * 7.5) % 100}%`, top: `${(i * 11.5) % 100}%` }}
-              animate={{ x: [0, 45, 0], y: [0, -55, 0], opacity: [0.25, 0.85, 0.25] }}
-              transition={{ duration: 9 + i % 12, repeat: Infinity, delay: i * -0.65 }}
+              className="absolute w-[2.5px] h-[2.5px] bg-white/35 rounded-full"
+              style={{ 
+                left: `${(i * 17) % 100}%`, 
+                top: `${(i * 23) % 100}%` 
+              }}
+              animate={{ 
+                x: [0, 38, 0], 
+                y: [0, -48, 0], 
+                opacity: [0.2, 0.75, 0.2] 
+              }}
+              transition={{ 
+                duration: 7.5 + (i % 8), 
+                repeat: Infinity, 
+                delay: i * -0.55 
+              }}
             />
           ))}
         </div>
-       
+
         <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/80 to-black" />
-       
+
         <div className="relative z-10 text-center px-8">
           {Icon && (
-            <motion.div animate={{ rotate: [0, 25, 0] }} transition={{ duration: 4, repeat: Infinity }} className="mx-auto mb-6 text-purple-400 group-hover:scale-110 transition-transform duration-700">
+            <motion.div 
+              animate={{ rotate: [0, 25, 0] }} 
+              transition={{ duration: 4, repeat: Infinity }} 
+              className="mx-auto mb-6 text-purple-400 group-hover:scale-110 transition-transform duration-700"
+            >
               <Icon size={68} />
             </motion.div>
           )}
+
           <div className="inline-flex items-center gap-3 px-6 py-3 bg-white/5 border border-white/10 rounded-full mb-6 group-hover:bg-white/10 transition-colors">
             <div className="w-3 h-3 bg-purple-400 rounded-full animate-pulse" />
             <span className="uppercase text-xs tracking-widest">Coming Soon</span>
           </div>
+
           <p className="text-3xl font-light text-white/80">In Development</p>
         </div>
       </div>
+
       <div className="p-8 flex-1 flex flex-col">
-        <h3 className="text-3xl font-bold mb-4 group-hover:text-purple-400 transition-all duration-300">{title}</h3>
+        <h3 className="text-3xl font-bold mb-4 group-hover:text-purple-400 transition-all duration-300">
+          {title}
+        </h3>
         <p className="text-zinc-400 mb-8 flex-1">{description}</p>
+        
         <div className="flex flex-wrap gap-2 mt-auto">
           {tags.map(tag => (
-            <span key={tag} className="text-xs px-4 py-1.5 bg-white/5 rounded-full border border-white/10 text-zinc-400 group-hover:border-purple-400/50 group-hover:text-purple-300 transition-all duration-300">
+            <span 
+              key={tag} 
+              className="text-xs px-4 py-1.5 bg-white/5 rounded-full border border-white/10 text-zinc-400 group-hover:border-purple-400/50 group-hover:text-purple-300 transition-all duration-300"
+            >
               {tag}
             </span>
           ))}
@@ -240,7 +296,7 @@ function ProjectCard({ title, description, tags, icon: Icon }: ProjectCardProps)
       </div>
     </motion.div>
   );
-}
+});
 
 // ==================== MAIN COMPONENT ====================
 export default function Home() {
@@ -261,7 +317,7 @@ export default function Home() {
     if (saved) setCurrentLang(saved);
   }, []);
 
-  // 3. useEffect загрузки переводов (с таймером)
+  // 3. useEffect загрузки переводов 
   useEffect(() => {
     const loadMessages = async () => {
       try {
@@ -279,14 +335,14 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolledPastHero(window.scrollY > 725); // поменяй 750, если нужно
+      setScrolledPastHero(window.scrollY > 725);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // 4. Функция t (ОБЯЗАТЕЛЬНО ЗДЕСЬ!)
+  // 4. Функция t
 const t = (key: string) => {
   if (!messages) return key;
   const keys = key.split('.');
@@ -335,7 +391,7 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
              shadow-[0_18px_80px_-25px_rgb(0,0,0,0.85),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(168,85,247,0.2)]
              rounded-br-[3rem] rounded-bl-[3rem]"
 >
-  {/* === ФОН (с правильным ограничением) === */}
+  {/* === ФОН === */}
   <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden rounded-br-[3rem] rounded-bl-[3rem]">
 
     {/* Глубокий космос */}
@@ -369,28 +425,41 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
       }}
     />
 
-    {/* Плавающие орбы */}
-    <motion.div className="absolute -top-8 left-[5%] w-[170px] h-[170px] rounded-full bg-violet-500/8 blur-[80px]"
-      animate={{ x: [0, 50, -30, 0], y: [0, -20, 14, 0] }} transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }} />
-    
-    <motion.div className="absolute top-[12%] right-[10%] w-[120px] h-[120px] rounded-full bg-cyan-400/8 blur-[65px]"
-      animate={{ x: [0, -40, 32, 0], y: [0, 22, -16, 0] }} transition={{ duration: 35, repeat: Infinity, ease: "easeInOut", delay: 5 }} />
-    
-    <motion.div className="absolute bottom-[8%] left-[22%] w-[95px] h-[95px] rounded-full bg-fuchsia-400/8 blur-[60px]"
-      animate={{ x: [0, 35, -25, 0], y: [0, -14, 20, 0] }} transition={{ duration: 27, repeat: Infinity, ease: "easeInOut", delay: 8 }} />
+    {/* === Плавающие орбы === */}
+      <motion.div 
+        className="absolute -top-8 left-[5%] w-[170px] h-[170px] rounded-full bg-violet-500/8 blur-[80px]"
+        animate={{ x: [0, 50, -30, 0], y: [0, -20, 14, 0] }} 
+        transition={{ duration: 30, repeat: Infinity, ease: "easeInOut" }}
+        style={{ willChange: 'transform' }}
+      />
 
-    {/* Центральное свечение */}
-    <motion.div 
-      className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[90px] rounded-full bg-purple-500/5 blur-[90px]"
-      animate={{ opacity: [0.3, 0.55, 0.3], scale: [1, 1.08, 1] }}
-      transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-    />
+      <motion.div 
+        className="absolute top-[12%] right-[10%] w-[120px] h-[120px] rounded-full bg-cyan-400/8 blur-[65px]"
+        animate={{ x: [0, -40, 32, 0], y: [0, 22, -16, 0] }} 
+        transition={{ duration: 35, repeat: Infinity, ease: "easeInOut", delay: 5 }}
+        style={{ willChange: 'transform' }}
+      />
 
-    {/* Звёзды */}
-    <motion.div className="absolute left-[7%] top-[20%] w-[1.5px] h-[1.5px] bg-white/50 rounded-full" animate={{ opacity: [0.2, 0.7, 0.2] }} transition={{ duration: 3.8, repeat: Infinity }} />
-    <motion.div className="absolute left-[26%] top-[35%] w-[1.5px] h-[1.5px] bg-white/45 rounded-full" animate={{ opacity: [0.25, 0.65, 0.25] }} transition={{ duration: 4.1, repeat: Infinity, delay: 2.6 }} />
-    <motion.div className="absolute left-[53%] top-[26%] w-[1.5px] h-[1.5px] bg-white/50 rounded-full" animate={{ opacity: [0.18, 0.62, 0.18] }} transition={{ duration: 3.5, repeat: Infinity, delay: 3.2 }} />
-    <motion.div className="absolute left-[78%] top-[41%] w-[1.5px] h-[1.5px] bg-white/45 rounded-full" animate={{ opacity: [0.22, 0.68, 0.22] }} transition={{ duration: 4.3, repeat: Infinity, delay: 2.1 }} />
+      <motion.div 
+        className="absolute bottom-[8%] left-[22%] w-[95px] h-[95px] rounded-full bg-fuchsia-400/8 blur-[60px]"
+        animate={{ x: [0, 35, -25, 0], y: [0, -14, 20, 0] }} 
+        transition={{ duration: 27, repeat: Infinity, ease: "easeInOut", delay: 8 }}
+        style={{ willChange: 'transform' }}
+      />
+
+      {/* Центральное свечение */}
+      <motion.div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[220px] h-[90px] rounded-full bg-purple-500/5 blur-[90px]"
+        animate={{ opacity: [0.3, 0.55, 0.3], scale: [1, 1.08, 1] }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        style={{ willChange: 'transform, opacity' }}
+      />
+
+      {/* === Звёзды  === */}
+      <div className="absolute left-[7%] top-[20%] w-[1.5px] h-[1.5px] bg-white/50 rounded-full animate-[pulse_3.8s_infinite]" />
+      <div className="absolute left-[26%] top-[35%] w-[1.5px] h-[1.5px] bg-white/45 rounded-full animate-[pulse_4.1s_infinite_2.6s]" />
+      <div className="absolute left-[53%] top-[26%] w-[1.5px] h-[1.5px] bg-white/50 rounded-full animate-[pulse_3.5s_infinite_3.2s]" />
+      <div className="absolute left-[78%] top-[41%] w-[1.5px] h-[1.5px] bg-white/45 rounded-full animate-[pulse_4.3s_infinite_2.1s]" />
 
     {/* HUD элементы */}
     <div className="absolute top-[10px] left-[14px] w-6 h-px bg-purple-400/50" />
@@ -548,7 +617,6 @@ className="fixed top-0 left-0 right-0 z-50 overflow-visible border-b border-whit
           <span className="text-xl">{languageFlags[currentLang]}</span>
         </motion.button>
 
-        {/* Выпадающий список — поднят выше всего */}
         <div className="absolute right-0 mt-2 w-56 bg-zinc-900 border border-white/10 rounded-2xl shadow-2xl py-2 z-[999] 
                         opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
           {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
@@ -697,7 +765,7 @@ initial={{ x: 120, opacity: 0 }}
   <div className="glow glow1 absolute top-[-40%] left-[-20%] w-[650px] h-[650px] bg-purple-500/20 rounded-full blur-[120px]" />
   <div className="glow glow2 absolute bottom-[-30%] right-[-25%] w-[850px] h-[850px] bg-pink-500/20 rounded-full blur-[140px]" />
 
-  {/* Плавающие звёзды (уменьшил количество на телефоне) */}
+  {/* Плавающие звёзды */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     {Array.from({ length: window.innerWidth < 768 ? 60 : 120 }).map((_, i) => {
       const left = (i * 4.5) % 100;
@@ -717,7 +785,7 @@ initial={{ x: 120, opacity: 0 }}
     })}
   </div>
 
-  {/* Плавающие иконки (показываем на телефоне, но меньше и реже) */}
+  {/* Плавающие иконки */}
   <div className="absolute inset-0 overflow-hidden pointer-events-none">
     {[
       { Icon: Code2, left: '15%', top: '30%', delay: 0, color: '#a855f7' },
@@ -815,6 +883,7 @@ initial={{ x: 120, opacity: 0 }}
       <motion.h2
         initial={{ opacity: 0, y: 60 }}
         whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.3 }}
         className="text-6xl md:text-7xl font-bold tracking-tight flex items-center gap-5"
       >
         <User size={75} className="text-purple-400" /> 
@@ -822,18 +891,10 @@ initial={{ x: 120, opacity: 0 }}
       </motion.h2>
 
       <div className="space-y-6 text-lg leading-relaxed text-zinc-300">
-        <p>
-          {t('about.p1')}
-        </p>
-        <p>
-          {t('about.p2')}
-        </p>
-        <p>
-          {t('about.p3')}
-        </p>
-        <p>
-          {t('about.p4')}
-        </p>
+        <p>{t('about.p1')}</p>
+        <p>{t('about.p2')}</p>
+        <p>{t('about.p3')}</p>
+        <p>{t('about.p4')}</p>
       </div>
 
       <div className="flex flex-wrap gap-4 pt-6">
@@ -858,6 +919,7 @@ initial={{ x: 120, opacity: 0 }}
     <motion.div
       initial={{ opacity: 0, scale: 0.85, rotate: -8 }}
       whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+      viewport={{ once: true, amount: 0.4 }}
       transition={{ type: "spring", stiffness: 90 }}
       className="relative aspect-square rounded-3xl overflow-hidden border border-purple-500/30 shadow-2xl shadow-purple-600/40 group"
     >
@@ -873,12 +935,14 @@ initial={{ x: 120, opacity: 0 }}
     </motion.div>
   </div>
 </section>
+
 {/* ==================== SKILLS ==================== */}
 <section id="skills" className="py-28 md:py-40 border-t border-white/10 bg-zinc-950 relative overflow-hidden">
   <div className="max-w-6xl mx-auto px-6">
     <motion.h2
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.25 }}
       className="text-6xl md:text-7xl font-bold text-center mb-20 flex justify-center items-center gap-6"
     >
       {t('skills.title')} <Sparkles size={60} className="text-purple-300 animate-pulse" />
@@ -933,6 +997,7 @@ initial={{ x: 120, opacity: 0 }}
     </div>
   </div>
 </section>
+
 {/* ==================== PROJECTS ==================== */}
 <section id="projects" className="py-28 md:py-40 border-t border-white/10">
   <div className="max-w-6xl mx-auto px-6">
@@ -940,10 +1005,12 @@ initial={{ x: 120, opacity: 0 }}
       <motion.h2 
         initial={{ opacity: 0, y: 50 }} 
         whileInView={{ opacity: 1, y: 0 }} 
+        viewport={{ once: true, amount: 0.3 }}
         className="text-6xl md:text-7xl font-bold flex items-center gap-4"
       >
         {t('projects.title')} <Briefcase size={68} className="text-pink-400" />
       </motion.h2>
+      
       <p className="text-purple-400 text-xl mt-4 md:mt-0">
         {t('projects.subtitle')}
       </p>
@@ -972,6 +1039,7 @@ initial={{ x: 120, opacity: 0 }}
     <motion.h2 
       initial={{ opacity: 0, y: 40 }} 
       whileInView={{ opacity: 1, y: 0 }} 
+      viewport={{ once: true, amount: 0.3 }}
       className="text-6xl md:text-7xl font-bold mb-8 flex justify-center items-center gap-4"
     >
       {t('contact.title')} <Sparkles size={100} className="text-yellow-400" />
@@ -981,23 +1049,15 @@ initial={{ x: 120, opacity: 0 }}
       {t('contact.subtitle')}
     </p>
 
+    {/* Большая кнопка email*/}
     <motion.a
       href="https://mail.google.com/mail/?view=cm&fs=1&to=shiparezik1@gmail.com"
-      whileHover={{
-        scale: 1.03,
-        y: -1,
-      }}
-      whileTap={{
-        scale: 0.985,
-      }}
+      whileHover={{ scale: 1.03, y: -1 }}
+      whileTap={{ scale: 0.985 }}
       animate={{
         backgroundPosition: ["0% 50%", "200% 50%", "0% 50%"],
       }}
       transition={{
-        type: "spring",
-        stiffness: 650,
-        damping: 26,
-        mass: 0.45,
         backgroundPosition: {
           duration: 4,
           repeat: Infinity,
@@ -1012,6 +1072,7 @@ initial={{ x: 120, opacity: 0 }}
       <Mail className="w-10 h-10 transition-transform duration-200 group-hover:rotate-12" />
     </motion.a>
 
+    {/* Социальные ссылки */}
     <div className="mt-24 flex justify-center gap-12">
       {[
         { href: "https://github.com/shiparezik", icon: GitHubIcon, label: "GitHub" },
@@ -1038,9 +1099,34 @@ initial={{ x: 120, opacity: 0 }}
   </div>
 </section>
 
-<footer className="py-12 border-t border-white/10 text-center text-sm text-zinc-500 flex items-center justify-center gap-3">
-  {t('footer')}
-</footer>
+{/* ==================== FOOTER ==================== */}
+<motion.footer
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.3 }}
+  transition={{ duration: 0.6, ease: "easeOut" }}
+  className="relative py-14 border-t border-white/10 bg-black/60"
+>
+  <div className="max-w-6xl mx-auto px-6">
+    {/* Декоративная тонкая линия сверху */}
+    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-24 h-px bg-gradient-to-r from-transparent via-purple-500/60 to-transparent" />
+
+    <div className="flex flex-col items-center justify-center gap-4 text-center">
+
+      <p className="text-zinc-400 text-sm tracking-[1px]">
+        {t('footer')}
+      </p>
+
+      {/* Дополнительная информация (лёгкая) */}
+      <div className="flex items-center gap-2 text-[11px] text-zinc-500 tracking-widest">
+        <span>© 2026</span>
+        <span className="text-purple-400/70">•</span>
+        <span>SHIPAREZIK</span>
+      </div>
+    </div>
+  </div>
+</motion.footer>
+
       </main>
     );
 }
