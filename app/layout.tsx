@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Optimize from '@/components/Optimize';
+import Optimize from './components/Optimize';
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
