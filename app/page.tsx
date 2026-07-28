@@ -2,6 +2,7 @@
 
 import Navbar from './components/Navbar';
 import Cursor from './components/Cursor';
+import Optimize from './components/Optimize';
 import { ArrowRight, Mail, Code2, Zap, Trophy, Calendar, MapPin } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { useState, useEffect } from 'react';
@@ -63,6 +64,7 @@ export default function Portfolio() {
 
   return (
     <main className="bg-[#08060d] text-white selection:bg-[#c084fc]/30">
+      <Optimize />
       <Cursor />
       <Navbar
         currentLang={currentLang}
@@ -82,86 +84,96 @@ export default function Portfolio() {
       backgroundPosition: 'center',
     }}
   />
-  <div className="absolute inset-0 bg-[#08060d]/80 z-10" />
-  <div className="absolute inset-0 bg-gradient-to-b from-[#08060d]/30 via-transparent to-[#08060d] z-10" />
+  <div className="absolute inset-0 z-[1] bg-[#08060d]/92" />
+  <div className="absolute inset-0 z-[1] bg-gradient-to-b from-[#08060d]/70 via-[#08060d]/35 to-[#08060d]" />
+  <div className="absolute inset-0 z-[1] bg-[radial-gradient(ellipse_at_center,rgba(192,132,252,0.18)_0%,transparent_55%)]" />
 
-  {/* Ambient glow behind logo */}
-  <div className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] sm:w-[640px] h-[520px] sm:h-[640px] bg-[#c084fc]/14 rounded-full blur-[120px] z-10 pointer-events-none" />
+  {/* Glow layers */}
+  <div className="pointer-events-none absolute top-[25%] left-1/2 z-[1] h-[620px] w-[620px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#c084fc]/20 blur-[1000px]" />
+  <div className="pointer-events-none absolute top-[30%] left-1/2 z-[1] h-[280px] w-[280px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#e879f9]/15 blur-[200px]" />
 
-  {/* Orbit rings */}
-  <div className="absolute top-[42%] left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none">
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 48, repeat: Infinity, ease: 'linear' }}
-      className="w-[340px] sm:w-[460px] md:w-[540px] aspect-square rounded-full border border-[#c084fc]/20"
-    />
-    <motion.div
-      animate={{ rotate: -360 }}
-      transition={{ duration: 68, repeat: Infinity, ease: 'linear' }}
-      className="absolute inset-[12%] rounded-full border border-[#c084fc]/12"
-    />
-    <motion.div
-      animate={{ rotate: 360 }}
-      transition={{ duration: 90, repeat: Infinity, ease: 'linear' }}
-      className="absolute inset-[24%] rounded-full border border-[#c084fc]/08"
-    />
+  {/* Rings */}
+  <div className="pointer-events-none absolute top-[40%] left-1/2 z-[1] -translate-x-1/2 -translate-y-1/2">
+    <div className="h-[300px] w-[300px] rounded-full border border-[#c084fc]/15 sm:h-[380px] sm:w-[380px] md:h-[460px] md:w-[460px]" />
+    <div className="absolute inset-[14%] rounded-full border border-[#c084fc]/10" />
   </div>
 
-      {/* Content */}
-      <div className="relative z-20 w-full max-w-4xl mx-auto px-6 text-center pt-20 pb-16">
-        
-        {/* ===== LOGO ===== */}
+  {/* Content */}
+  <div className="relative z-10 mx-auto w-full max-w-4xl px-6 pb-24 pt-28 text-center">
+
+    {/* Status */}
     <motion.div
-      initial={{ opacity: 0, y: 28, scale: 0.94 }}
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.55 }}
+      className="mb-9 flex justify-center"
+    >
+      <div className="inline-flex items-center gap-2.5 rounded-full border border-[#c084fc]/30 bg-gradient-to-r from-[#c084fc]/15 to-[#e879f9]/10 px-4 py-1.5 shadow-[0_0_24px_-8px_rgba(192,132,252,0.5)] backdrop-blur-md">
+        <span className="relative flex h-2 w-2">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
+        </span>
+        <span className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/75">
+          {t('openTo')}
+        </span>
+      </div>
+    </motion.div>
+
+    {/* Logo */}
+    <motion.div
+      initial={{ opacity: 0, y: 28, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-      className="mb-8 sm:mb-10 flex justify-center"
+      transition={{ duration: 1.05, ease: [0.16, 1, 0.3, 1] }}
+      className="mb-8 flex justify-center"
     >
       <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'easeInOut' }}
+        animate={{ y: [0, -10, 0] }}
+        transition={{ duration: 5.8, repeat: Infinity, ease: 'easeInOut' }}
         className="relative"
       >
-        {/* soft glow behind logo */}
-        <div className="absolute inset-0 scale-110 bg-[#c084fc]/20 blur-[40px] rounded-full pointer-events-none" />
-
+        <div className="absolute inset-0 scale-125 rounded-full bg-[#c084fc]/30 blur-[55px]" />
+        <div className="absolute inset-0 scale-90 rounded-full bg-[#e879f9]/15 blur-[30px]" />
         <img
           src="/logo.shiparezik.png"
           alt="shiparezik"
-          className="relative w-[240px] sm:w-[300px] md:w-[360px] lg:w-[400px] h-auto mx-auto select-none"
+          className="relative mx-auto h-auto w-[240px] select-none sm:w-[300px] md:w-[360px] lg:w-[410px]"
           draggable={false}
         />
       </motion.div>
     </motion.div>
 
-    {/* ===== NAME ===== */}
+    {/* Name */}
     <motion.h1
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.75, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
-      className="font-orbitron text-4xl sm:text-5xl md:text-6xl lg:text-[4.5rem] font-black tracking-tight mb-5"
+      transition={{ duration: 0.85, delay: 0.12, ease: [0.16, 1, 0.3, 1] }}
+      className="font-orbitron mb-4 text-[2.8rem] font-black tracking-[-0.045em] sm:text-5xl md:text-6xl lg:text-[4.8rem]"
     >
-      <span className="bg-gradient-to-r from-white via-[#f0abfc] to-[#c084fc] bg-clip-text text-transparent">
+      <span className="bg-gradient-to-r from-white via-[#f5d0fe] to-[#c084fc] bg-clip-text text-transparent">
         {t('hero.name')}
       </span>
     </motion.h1>
 
     {/* Role */}
-    <motion.p
-      initial={{ opacity: 0, y: 14 }}
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.32 }}
-      className="text-lg sm:text-xl md:text-2xl font-medium text-[#c084fc] tracking-wide mb-5"
+      transition={{ duration: 0.7, delay: 0.22 }}
+      className="mb-6 flex items-center justify-center gap-4"
     >
-      {t('hero.role')}
-    </motion.p>
+      <span className="h-px w-12 bg-gradient-to-r from-transparent via-[#c084fc]/70 to-[#c084fc]/20" />
+      <p className="text-sm font-semibold uppercase tracking-[0.24em] text-[#c084fc] sm:text-[15px]">
+        {t('hero.role')}
+      </p>
+      <span className="h-px w-12 bg-gradient-to-l from-transparent via-[#c084fc]/70 to-[#c084fc]/20" />
+    </motion.div>
 
     {/* Description */}
     <motion.p
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.45 }}
-      className="text-[15px] sm:text-base md:text-lg text-white/45 max-w-md mx-auto mb-11 leading-relaxed"
+      transition={{ duration: 0.7, delay: 0.32 }}
+      className="mx-auto mb-11 max-w-lg text-[15px] leading-relaxed text-white/42 sm:text-base"
     >
       {t('hero.description')}
     </motion.p>
@@ -170,82 +182,67 @@ export default function Portfolio() {
     <motion.div
       initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.7, delay: 0.58 }}
-      className="flex flex-col sm:flex-row gap-3.5 justify-center"
+      transition={{ duration: 0.7, delay: 0.42 }}
+      className="flex flex-col items-center justify-center gap-3.5 sm:flex-row"
     >
       <button
         onClick={() => scrollToSection('projects')}
-        className="group relative inline-flex items-center justify-center gap-2.5 px-8 py-4
-                   bg-gradient-to-r from-[#c084fc] to-[#e879f9] text-white rounded-2xl
-                   font-semibold text-[15px]
-                   shadow-[0_0_36px_-8px_rgba(192,132,252,0.65)]
-                   hover:shadow-[0_0_48px_-6px_rgba(192,132,252,0.85)]
-                   transition-all duration-300 active:scale-[0.97]"
+        className="group relative inline-flex min-w-[180px] items-center justify-center gap-2 overflow-hidden rounded-2xl px-8 py-4 text-sm font-semibold text-white shadow-[0_0_40px_-8px_rgba(192,132,252,0.75)] transition-transform duration-300 active:scale-[0.97]"
       >
-        {t('nav.projectsBtn')}
-        <ArrowRight className="w-4.5 h-4.5 group-hover:translate-x-1 transition-transform duration-300" />
+        <span className="absolute inset-0 bg-gradient-to-r from-[#c084fc] via-[#e879f9] to-[#c084fc] bg-[length:200%_100%] transition-[background-position] duration-500 group-hover:bg-[position:100%_0]" />
+        <span className="relative flex items-center gap-2">
+          {t('nav.projectsBtn')}
+          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+        </span>
       </button>
 
       <button
         onClick={() => scrollToSection('contact')}
-        className="inline-flex items-center justify-center px-8 py-4 rounded-2xl
-                   border border-white/15 text-white/75 font-medium text-[15px]
-                   hover:border-white/30 hover:text-white hover:bg-white/[0.04]
-                   transition-all duration-300 active:scale-[0.97]"
+        className="inline-flex min-w-[180px] items-center justify-center rounded-2xl border border-white/15 bg-white/[0.03] px-8 py-4 text-sm font-medium text-white/70 backdrop-blur-sm transition-all duration-300 hover:border-[#c084fc]/35 hover:bg-[#c084fc]/10 hover:text-white active:scale-[0.97]"
       >
         {t('nav.contact')}
       </button>
     </motion.div>
+
+    {/* Socials */}
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.58, duration: 0.6 }}
+      className="mt-12 flex items-center justify-center gap-3"
+    >
+      {[
+        { href: 'https://github.com/shiparezik', icon: '/icons/github.svg', alt: 'GitHub' },
+        { href: 'https://www.linkedin.com/in/danylo-shypotko-85924a33a/', icon: '/icons/linkedin.svg', alt: 'LinkedIn' },
+        { href: 'mailto:danilsipatko@gmail.com', icon: '/icons/mail.svg', alt: 'Email' },
+      ].map((item) => (
+        <a
+          key={item.alt}
+          href={item.href}
+          target={item.href.startsWith('http') ? '_blank' : undefined}
+          rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          className="group flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] transition-all duration-300 hover:-translate-y-1 hover:border-[#c084fc]/45 hover:bg-[#c084fc]/12 hover:shadow-[0_0_20px_-6px_rgba(192,132,252,0.6)]"
+        >
+          <img src={item.icon} alt={item.alt} className="h-4 w-4 invert opacity-65 transition-opacity group-hover:opacity-100" />
+        </a>
+      ))}
+    </motion.div>
   </div>
 
-  {/* Optimized particles (меньше + легче) */}
-  <div className="absolute inset-0 z-10 pointer-events-none overflow-hidden">
-    {[
-      { x: 12, y: 18, d: 5.2, delay: 0.3 },
-      { x: 78, y: 22, d: 6.1, delay: 1.1 },
-      { x: 25, y: 68, d: 4.8, delay: 0.7 },
-      { x: 88, y: 55, d: 5.7, delay: 1.8 },
-      { x: 45, y: 12, d: 6.4, delay: 0.2 },
-      { x: 65, y: 78, d: 5.0, delay: 2.2 },
-      { x: 8,  y: 48, d: 5.9, delay: 1.4 },
-      { x: 92, y: 35, d: 4.6, delay: 0.9 },
-      { x: 35, y: 85, d: 6.2, delay: 1.6 },
-      { x: 55, y: 40, d: 5.3, delay: 0.5 },
-      { x: 18, y: 30, d: 5.8, delay: 2.0 },
-      { x: 72, y: 65, d: 4.9, delay: 1.3 },
-    ].map((p, i) => (
-      <motion.div
-        key={i}
-        className="absolute w-1 h-1 rounded-full bg-[#c084fc]/70"
-        style={{ left: `${p.x}%`, top: `${p.y}%` }}
-        animate={{
-          y: [0, -70, 0],
-          opacity: [0.15, 0.7, 0.15],
-        }}
-        transition={{
-          duration: p.d,
-          repeat: Infinity,
-          delay: p.delay,
-          ease: 'easeInOut',
-        }}
-      />
-    ))}
-  </div>
-
-  {/* Scroll indicator */}
+  {/* Scroll */}
   <motion.div
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
-    transition={{ delay: 1.3, duration: 0.8 }}
-    className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2"
+    transition={{ delay: 1.15, duration: 0.7 }}
+    className="absolute bottom-7 left-1/2 z-10 flex -translate-x-1/2 flex-col items-center gap-2"
   >
-    <span className="text-[10px] uppercase tracking-[0.25em] text-white/25">Scroll</span>
+    <span className="text-[10px] uppercase tracking-[0.32em] text-white/20">Scroll</span>
     <motion.div
       animate={{ y: [0, 6, 0] }}
       transition={{ duration: 1.8, repeat: Infinity, ease: 'easeInOut' }}
-      className="w-5 h-8 rounded-full border border-white/20 flex justify-center pt-1.5"
+      className="flex h-8 w-5 justify-center rounded-full border border-white/15 pt-1.5"
     >
-      <div className="w-1 h-1.5 rounded-full bg-[#c084fc]/90" />
+      <div className="h-1.5 w-1 rounded-full bg-[#c084fc] shadow-[0_0_8px_rgba(192,132,252,0.8)]" />
     </motion.div>
   </motion.div>
 </section>

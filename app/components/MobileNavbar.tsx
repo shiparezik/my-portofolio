@@ -9,15 +9,22 @@ interface NavbarProps {
   changeLanguage: (lang: 'en' | 'pl' | 'uk' | 'ru') => void;
   languageFlags: Record<string, string>;
   languageNames: Record<string, string>;
-  t: (key: string) => string;
+  t?: (key: string) => string;
 }
 
+const labels: Record<string, Record<string, string>> = {
+  en: { about: 'About', skills: 'Skills', services: 'Services', projects: 'Projects', contact: 'Contact' },
+  pl: { about: 'O mnie', skills: 'Umiejętności', services: 'Usługi', projects: 'Projekty', contact: 'Kontakt' },
+  uk: { about: 'Про мене', skills: 'Навички', services: 'Послуги', projects: 'Проекти', contact: 'Контакт' },
+  ru: { about: 'Обо мне', skills: 'Навыки', services: 'Услуги', projects: 'Проекты', contact: 'Контакт' },
+};
+
 const navItems = [
-  { id: 'about', key: 'nav.about' },
-  { id: 'skills', key: 'nav.skills' },
-  { id: 'services', key: 'nav.services' },
-  { id: 'projects', key: 'nav.projects' },
-  { id: 'contact', key: 'nav.contact' },
+  { id: 'about', key: 'about' },
+  { id: 'skills', key: 'skills' },
+  { id: 'services', key: 'services' },
+  { id: 'projects', key: 'projects' },
+  { id: 'contact', key: 'contact' },
 ];
 
 export default function Navbar({
@@ -32,9 +39,17 @@ export default function Navbar({
   const [langOpen, setLangOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
+  const label = (key: string) => {
+    if (typeof t === 'function') {
+      const val = t(`nav.${key}`);
+      if (val && val !== `nav.${key}`) return val;
+    }
+    return labels[currentLang]?.[key] || labels.en[key] || key;
+  };
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -44,8 +59,10 @@ export default function Navbar({
       const el = document.getElementById(item.id);
       if (!el) return;
       const obs = new IntersectionObserver(
-        ([entry]) => entry.isIntersecting && setActiveSection(item.id),
-        { threshold: 0.3 }
+        ([entry]) => {
+          if (entry.isIntersecting) setActiveSection(item.id);
+        },
+        { threshold: 0.25 }
       );
       obs.observe(el);
       observers.push(obs);
@@ -67,84 +84,82 @@ export default function Navbar({
 
   return (
     <>
-      {/* ===== DESKTOP BAR ===== */}
+      {/* TOP BAR */}
       <header
-        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
           scrolled
-            ? 'bg-[#08060d]/80 backdrop-blur-2xl border-b border-[#c084fc]/20 shadow-[0_0_40px_-10px_rgba(192,132,252,0.25)]'
+            ? 'bg-[#08060d]/95 border-b border-white/10 md:bg-[#08060d]/80 md:backdrop-blur-xl md:border-[#c084fc]/20'
             : 'bg-transparent'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-5 h-[72px] flex items-center justify-between">
+        <div className="mx-auto flex h-[64px] max-w-6xl items-center justify-between px-5 md:h-[72px]">
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="group relative flex items-center"
+            className="relative flex items-center"
           >
-            <div className="absolute -inset-4 bg-[#c084fc]/25 rounded-full blur-2xl opacity-50 group-hover:opacity-90 transition-opacity duration-500" />
             <img
               src="/logo.shiparezik.png"
               alt="shiparezik"
-              className="relative h-12 sm:h-14 w-auto object-contain
-                         drop-shadow-[0_0_22px_rgba(192,132,252,0.85)]
-                         group-hover:drop-shadow-[0_0_38px_rgba(192,132,252,1)]
-                         transition-all duration-300 group-hover:scale-[1.06]"
+              className="relative h-11 w-auto object-contain sm:h-12 md:h-14"
+              draggable={false}
             />
           </button>
 
-          {/* Desktop Links */}
-          <nav className="hidden md:flex items-center gap-1 bg-white/[0.03] border border-white/10 rounded-full px-1.5 py-1.5">
+          {/* Desktop links */}
+          <nav className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/[0.03] px-1.5 py-1.5 md:flex">
             {navItems.map((item) => {
               const active = activeSection === item.id;
               return (
                 <button
                   key={item.id}
                   onClick={() => scrollTo(item.id)}
-                  className={`relative px-4 py-2 text-[13px] font-medium tracking-wide rounded-full transition-all duration-300 ${
+                  className={`relative rounded-full px-4 py-2 text-[13px] font-medium tracking-wide transition-colors ${
                     active ? 'text-white' : 'text-white/50 hover:text-white'
                   }`}
                 >
                   {active && (
                     <motion.span
                       layoutId="neon-pill"
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-[#c084fc]/25 to-[#e879f9]/20 border border-[#c084fc]/40 shadow-[0_0_20px_-5px_rgba(192,132,252,0.5)]"
-                      transition={{ type: 'spring', bounce: 0.2, duration: 0.45 }}
+                      className="absolute inset-0 rounded-full border border-[#c084fc]/40 bg-gradient-to-r from-[#c084fc]/25 to-[#e879f9]/20"
+                      transition={{ type: 'spring', bounce: 0.2, duration: 0.4 }}
                     />
                   )}
-                  <span className="relative z-10">{t(item.key)}</span>
+                  <span className="relative z-10">{label(item.key)}</span>
                 </button>
               );
             })}
           </nav>
 
           {/* Right */}
-          <div className="flex items-center gap-2.5">
-            <div className="hidden md:flex items-center gap-1.5 mr-1">
+          <div className="flex items-center gap-2">
+            <div className="mr-1 hidden items-center gap-1.5 md:flex">
               <a
                 href="https://github.com/shiparezik"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#c084fc]/40 transition-all"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5"
               >
-                <img src="/icons/github.svg" alt="GitHub" className="w-4 h-4 invert opacity-70 hover:opacity-100" />
+                <img src="/icons/github.svg" alt="GitHub" className="h-4 w-4 invert opacity-70" />
               </a>
               <a
                 href="https://www.linkedin.com/in/danylo-shypotko-85924a33a/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center justify-center w-9 h-9 rounded-xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-[#c084fc]/40 transition-all"
+                className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5"
               >
-                <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-4 h-4 invert opacity-70 hover:opacity-100" />
+                <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-4 w-4 invert opacity-70" />
               </a>
             </div>
 
+            {/* Lang desktop */}
             <div className="relative hidden md:block">
               <button
                 onClick={() => setLangOpen(!langOpen)}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white/5 border border-white/10 hover:border-[#c084fc]/50 hover:bg-[#c084fc]/10 text-sm transition-all"
+                className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm"
               >
                 <span className="font-medium">{languageFlags[currentLang]}</span>
-                <ChevronDown className={`w-3.5 h-3.5 text-white/40 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown className={`h-3.5 w-3.5 text-white/40 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
               </button>
 
               <AnimatePresence>
@@ -152,10 +167,11 @@ export default function Navbar({
                   <>
                     <div className="fixed inset-0 z-40" onClick={() => setLangOpen(false)} />
                     <motion.div
-                      initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.95 }}
-                      className="absolute right-0 mt-3 w-44 rounded-2xl border border-[#c084fc]/20 bg-[#0c0a14]/95 backdrop-blur-2xl shadow-[0_0_40px_-10px_rgba(192,132,252,0.3)] z-50 overflow-hidden"
+                      initial={{ opacity: 0, y: 6 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 6 }}
+                      transition={{ duration: 0.15 }}
+                      className="absolute right-0 z-50 mt-3 w-44 overflow-hidden rounded-2xl border border-white/10 bg-[#0c0a14] shadow-xl"
                     >
                       <div className="p-1.5">
                         {(['en', 'pl', 'uk', 'ru'] as const).map((lang) => (
@@ -165,13 +181,13 @@ export default function Navbar({
                               changeLanguage(lang);
                               setLangOpen(false);
                             }}
-                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all ${
+                            className={`flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm ${
                               currentLang === lang
                                 ? 'bg-[#c084fc]/20 text-white'
                                 : 'text-white/60 hover:bg-white/5 hover:text-white'
                             }`}
                           >
-                            <span className="font-semibold w-7">{languageFlags[lang]}</span>
+                            <span className="w-7 font-semibold">{languageFlags[lang]}</span>
                             {languageNames[lang]}
                           </button>
                         ))}
@@ -182,95 +198,88 @@ export default function Navbar({
               </AnimatePresence>
             </div>
 
+            {/* Burger */}
             <button
               onClick={() => setMobileOpen(true)}
-              className="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10"
+              className="rounded-xl border border-white/10 bg-white/5 p-2.5 md:hidden"
+              aria-label="Open menu"
             >
-              <Menu className="w-5 h-5" />
+              <Menu className="h-5 w-5" />
             </button>
           </div>
         </div>
       </header>
 
-      {/* ===== MOBILE FULLSCREEN ===== */}
+      {/* MOBILE MENU — lightweight */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed inset-0 z-[60] md:hidden"
+            transition={{ duration: 0.18 }}
+            className="fixed inset-0 z-[60] bg-[#08060d] md:hidden"
           >
-            <div className="absolute inset-0 bg-[#08060d]/96 backdrop-blur-2xl" />
-            <div className="absolute top-24 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#c084fc]/12 rounded-full blur-[90px]" />
-
-            <div className="relative h-full flex flex-col">
-              {/* Header */}
-              <div className="flex items-center justify-between px-6 h-[72px]">
+            <div className="flex h-full flex-col">
+              {/* Top */}
+              <div className="flex h-[64px] items-center justify-between px-5">
                 <img
                   src="/logo.shiparezik.png"
                   alt="shiparezik"
-                  className="h-10 w-auto object-contain drop-shadow-[0_0_16px_rgba(192,132,252,0.6)]"
+                  className="h-10 w-auto object-contain"
+                  draggable={false}
                 />
                 <button
                   onClick={() => setMobileOpen(false)}
-                  className="p-2.5 rounded-xl bg-white/5 border border-white/10"
+                  className="rounded-xl border border-white/10 bg-white/5 p-2.5"
+                  aria-label="Close menu"
                 >
-                  <X className="w-5 h-5" />
+                  <X className="h-5 w-5" />
                 </button>
               </div>
 
               {/* Links */}
-              <div className="flex-1 flex flex-col justify-center px-8">
-                {navItems.map((item, i) => {
+              <div className="flex flex-1 flex-col justify-center px-6">
+                {navItems.map((item) => {
                   const active = activeSection === item.id;
                   return (
-                    <motion.button
+                    <button
                       key={item.id}
-                      initial={{ opacity: 0, x: -18 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: 0.06 * i + 0.08 }}
                       onClick={() => scrollTo(item.id)}
-                      className={`text-left text-[28px] font-semibold tracking-tight py-3.5 transition-colors ${
+                      className={`py-3.5 text-left text-[26px] font-semibold tracking-tight ${
                         active ? 'text-white' : 'text-white/40'
                       }`}
                     >
-                      <span className="relative inline-flex items-center gap-3">
-                        {active && (
-                          <span className="w-2 h-2 rounded-full bg-[#c084fc] shadow-[0_0_10px_rgba(192,132,252,0.8)]" />
-                        )}
-                        {t(item.key)}
-                      </span>
-                    </motion.button>
+                      {label(item.key)}
+                    </button>
                   );
                 })}
               </div>
 
               {/* Bottom */}
-              <div className="px-6 pb-10 space-y-5">
+              <div className="space-y-4 px-6 pb-8">
                 <div className="flex justify-center gap-3">
                   <a
                     href="https://github.com/shiparezik"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-11 h-11 rounded-2xl bg-white/5 border border-white/10"
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"
                   >
-                    <img src="/icons/github.svg" alt="GitHub" className="w-5 h-5 invert opacity-75" />
+                    <img src="/icons/github.svg" alt="GitHub" className="h-5 w-5 invert opacity-75" />
                   </a>
                   <a
                     href="https://www.linkedin.com/in/danylo-shypotko-85924a33a/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-11 h-11 rounded-2xl bg-white/5 border border-white/10"
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"
                   >
-                    <img src="/icons/linkedin.svg" alt="LinkedIn" className="w-5 h-5 invert opacity-75" />
+                    <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-5 w-5 invert opacity-75" />
                   </a>
                   <a
                     href="mailto:danilsipatko@gmail.com"
-                    className="flex items-center justify-center w-11 h-11 rounded-2xl bg-white/5 border border-white/10"
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"
                   >
-                    <img src="/icons/mail.svg" alt="Email" className="w-5 h-5 invert opacity-75" />
+                    <img src="/icons/mail.svg" alt="Email" className="h-5 w-5 invert opacity-75" />
                   </a>
                 </div>
 
@@ -279,10 +288,10 @@ export default function Navbar({
                     <button
                       key={lang}
                       onClick={() => changeLanguage(lang)}
-                      className={`py-2.5 rounded-xl text-sm font-medium transition-all ${
+                      className={`rounded-xl py-2.5 text-sm font-medium ${
                         currentLang === lang
-                          ? 'bg-[#c084fc]/20 text-white border border-[#c084fc]/40'
-                          : 'bg-white/5 text-white/55 border border-white/10'
+                          ? 'border border-[#c084fc]/40 bg-[#c084fc]/20 text-white'
+                          : 'border border-white/10 bg-white/5 text-white/55'
                       }`}
                     >
                       {languageFlags[lang]}
