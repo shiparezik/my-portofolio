@@ -9,6 +9,7 @@ interface NavbarProps {
   changeLanguage: (lang: 'en' | 'pl' | 'uk' | 'ru') => void;
   languageFlags: Record<string, string>;
   languageNames: Record<string, string>;
+  t?: (key: string) => string; 
 }
 
 const labels: Record<string, Record<string, string>> = {
