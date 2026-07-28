@@ -9,15 +9,45 @@ interface NavbarProps {
   changeLanguage: (lang: 'en' | 'pl' | 'uk' | 'ru') => void;
   languageFlags: Record<string, string>;
   languageNames: Record<string, string>;
-  t: (key: string) => string;
 }
 
+const labels: Record<string, Record<string, string>> = {
+  en: {
+    about: 'About',
+    skills: 'Skills',
+    services: 'Services',
+    projects: 'Projects',
+    contact: 'Contact',
+  },
+  pl: {
+    about: 'O mnie',
+    skills: 'Umiejętności',
+    services: 'Usługi',
+    projects: 'Projekty',
+    contact: 'Kontakt',
+  },
+  uk: {
+    about: 'Про мене',
+    skills: 'Навички',
+    services: 'Послуги',
+    projects: 'Проекти',
+    contact: 'Контакт',
+  },
+  ru: {
+    about: 'Обо мне',
+    skills: 'Навыки',
+    services: 'Услуги',
+    projects: 'Проекты',
+    contact: 'Контакт',
+  },
+};
+
 const navItems = [
-  { id: 'about', key: 'nav.about' },
-  { id: 'skills', key: 'nav.skills' },
-  { id: 'services', key: 'nav.services' },
-  { id: 'projects', key: 'nav.projects' },
-  { id: 'contact', key: 'nav.contact' },
+  { id: 'about', key: 'about' },
+  { id: 'skills', key: 'skills' },
+  { id: 'services', key: 'services' },
+  { id: 'projects', key: 'projects' },
+  { id: 'contact', key: 'contact' },
 ];
 
 export default function Navbar({
@@ -25,12 +55,13 @@ export default function Navbar({
   changeLanguage,
   languageFlags,
   languageNames,
-  t,
 }: NavbarProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
+
+  const t = (key: string) => labels[currentLang]?.[key] || labels.en[key] || key;
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -67,7 +98,7 @@ export default function Navbar({
 
   return (
     <>
-      {/* ===== DESKTOP BAR ===== */}
+      {/* ===== TOP BAR ===== */}
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
           scrolled
@@ -76,6 +107,7 @@ export default function Navbar({
         }`}
       >
         <div className="max-w-6xl mx-auto px-5 h-[72px] flex items-center justify-between">
+          
           {/* Logo */}
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
@@ -117,9 +149,11 @@ export default function Navbar({
             })}
           </nav>
 
-          {/* Right */}
+          {/* Right side */}
           <div className="flex items-center gap-2.5">
-            <div className="hidden md:flex items-center gap-1.5 mr-1">
+            
+            {/* Social - Desktop */}
+            <div className="hidden md:flex items-center gap-1.5">
               <a
                 href="https://github.com/shiparezik"
                 target="_blank"
@@ -138,6 +172,7 @@ export default function Navbar({
               </a>
             </div>
 
+            {/* Language */}
             <div className="relative hidden md:block">
               <button
                 onClick={() => setLangOpen(!langOpen)}
@@ -182,6 +217,7 @@ export default function Navbar({
               </AnimatePresence>
             </div>
 
+            {/* Burger */}
             <button
               onClick={() => setMobileOpen(true)}
               className="md:hidden p-2.5 rounded-xl bg-white/5 border border-white/10"
@@ -192,21 +228,20 @@ export default function Navbar({
         </div>
       </header>
 
-      {/* ===== MOBILE FULLSCREEN ===== */}
+      {/* ===== MOBILE MENU ===== */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.25 }}
             className="fixed inset-0 z-[60] md:hidden"
           >
             <div className="absolute inset-0 bg-[#08060d]/96 backdrop-blur-2xl" />
             <div className="absolute top-24 left-1/2 -translate-x-1/2 w-64 h-64 bg-[#c084fc]/12 rounded-full blur-[90px]" />
 
             <div className="relative h-full flex flex-col">
-              {/* Header */}
+              {/* Top */}
               <div className="flex items-center justify-between px-6 h-[72px]">
                 <img
                   src="/logo.shiparezik.png"

@@ -2,9 +2,10 @@
   "nav": {
     "about": "About",
     "skills": "Skills",
+    "services": "Services",
     "projects": "Projects",
     "contact": "Contact",
-    "projectsBtn": "Projects"
+    "projectsBtn": "View Projects"
   },
   "hero": {
     "greeting": "HELLO, I'M",
@@ -14,7 +15,7 @@
   },
   "about": {
     "title": "About Me",
-    "p1": "Hi, I'm Danylo, a 17-year-old Software Engineering student in my 3rd year.",
+    "p1": "Hi, I'm Danylo, a 17-year-old Software Engineering student in my 4rd year.",
     "p2": "Started with HTML/CSS, fell in love with JavaScript, React & Next.js, and now building full-stack applications with modern tools.",
     "p3": "Fast learner, problem-solver, and creative coder who enjoys turning ideas into polished digital products.",
     "p4": "Programming for me is more than code — it's creativity, continuous growth, and the joy of solving real problems."
@@ -25,35 +26,62 @@
     "title": "My Skills",
     "frontend": "FRONTEND",
     "backend": "BACKEND & LANGUAGES",
-    "other": "OTHER",
-    "techs": {
-      "html": "The foundation of all web pages. Markup language for structuring content.",
-      "css": "Styling language. I create modern, responsive and beautiful designs.",
-      "javascript": "Core programming language of the web. Makes websites interactive.",
-      "react": "Popular library for building fast and dynamic user interfaces.",
-      "nextjs": "Powerful React framework for high-performance websites.",
-      "typescript": "Typed superset of JavaScript. Helps write more reliable code.",
-      "tailwind": "Utility-first CSS framework. Extremely fast UI development.",
-      "framer": "Library for smooth and beautiful animations in React.",
-      "python": "Versatile language. Great for backend, automation and data processing.",
-      "csharp": "Powerful language used in game development and enterprise applications.",
-      "cpp": "High-performance language for system programming.",
-      "nodejs": "JavaScript runtime for scalable backend applications.",
-      "express": "Minimalist web framework for Node.js.",
-      "sql": "Language for working with relational databases.",
-      "git": "Version control system. Used for all my projects and collaboration.",
-      "figma": "Professional design tool for UI/UX.",
-      "restapi": "Creating and working with APIs to connect frontend and backend.",
-      "fullstack": "Building complete web applications from start to finish.",
-      "webapps": "Developing modern, fast and responsive websites and web apps."
+    "other": "OTHER"
+  },
+  "services": {
+    "title": "Services",
+    "heading": "What I can do",
+    "subtitle": "From idea to production — clean code, modern design and solid architecture.",
+    "items": {
+      "frontend": {
+        "title": "Frontend Development",
+        "desc": "Modern, fast and responsive interfaces with React, Next.js and smooth animations."
+      },
+      "fullstack": {
+        "title": "Full-Stack Apps",
+        "desc": "Complete web applications with backend, databases and clean API architecture."
+      },
+      "uiux": {
+        "title": "UI / UX Design",
+        "desc": "Clean interfaces, thoughtful user flows and attention to every visual detail."
+      },
+      "performance": {
+        "title": "Performance",
+        "desc": "Optimizing load speed, Core Web Vitals and overall user experience."
+      },
+      "landing": {
+        "title": "Landing Pages",
+        "desc": "High-converting, visually strong landing pages that look expensive."
+      },
+      "maintenance": {
+        "title": "Maintenance",
+        "desc": "Ongoing support, updates, bug fixes and improvements for existing projects."
+      }
     }
   },
-  "projects": {
-    "title": "My Projects",
-    "subtitle": "Real stuff I built"
-  },
+
+"projects": {
+  "title": "My Projects",
+  "heading": "Projects",
+  "subtitle": "Real stuff I built",
+  "viewAll": "View all on GitHub",
+  "items": {
+"alpha": {
+      "type": "PERSONAL",
+      "title": "Project Alpha",
+      "desc": "Modern web application with beautiful animations and clean architecture."
+    },
+    "beta": {
+      "type": "PERSONAL",
+      "title": "Project Beta",
+      "desc": "Full-stack application with real-time features and beautiful UI."
+    }
+  }
+}, 
+  
   "contact": {
-    "title": "Let's Build Something Awesome Together",
+    "title": "Contact",
+    "heading": "Get in touch",
     "subtitle": "Have an exciting idea or just want to chat about tech?",
     "emailBtn": "Write me"
   },

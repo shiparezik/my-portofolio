@@ -2,9 +2,10 @@
   "nav": {
     "about": "O mnie",
     "skills": "Umiejętności",
+    "services": "Usługi",
     "projects": "Projekty",
     "contact": "Kontakt",
-    "projectsBtn": "Projekty"
+    "projectsBtn": "Zobacz projekty"
   },
   "hero": {
     "greeting": "CZEŚĆ, JESTEM",
@@ -14,44 +15,71 @@
   },
   "about": {
     "title": "O mnie",
-    "p1": "Cześć, jestem Danylo, 17-letni student Inżynierii Oprogramowania na 3. roku.",
+    "p1": "Cześć, jestem Danylo, 17-letni student Inżynierii Oprogramowania na 4. roku.",
     "p2": "Zacząłem od HTML/CSS, zakochałem się w JavaScript, React & Next.js, a teraz buduję aplikacje full-stack z nowoczesnymi narzędziami.",
     "p3": "Szybko się uczę, rozwiązywacz problemów i kreatywny koder, który lubi zamieniać pomysły w dopracowane produkty cyfrowe.",
     "p4": "Programowanie dla mnie to coś więcej niż kod — to kreatywność, ciągły rozwój i radość z rozwiązywania prawdziwych problemów."
   },
-"skills": {
-  "title": "Moje Umiejętności",
-  "frontend": "FRONTEND",
-  "backend": "BACKEND & JĘZYKI",
-  "other": "INNE",
-  "techs": {
-    "html": "Podstawa wszystkich stron internetowych. Język znaczników do strukturyzowania treści.",
-    "css": "Język stylizacji. Tworzę nowoczesne, responsywne i piękne projekty.",
-    "javascript": "Główny język programowania sieci. Sprawia, że strony stają się interaktywne.",
-    "react": "Popularna biblioteka do budowania szybkich i dynamicznych interfejsów.",
-    "nextjs": "Potężny framework React do wysokowydajnych stron internetowych.",
-    "typescript": "Typowany superset JavaScript. Pomaga pisać bardziej niezawodny kod.",
-    "tailwind": "Framework CSS typu utility-first. Ekstremalnie szybkie tworzenie UI.",
-    "framer": "Biblioteka do płynnych i pięknych animacji w React.",
-    "python": "Wszechstronny język. Świetny do backendu, automatyzacji i przetwarzania danych.",
-    "csharp": "Potężny język używany w game dev i aplikacjach enterprise.",
-    "cpp": "Język wysokowydajny do programowania systemowego.",
-    "nodejs": "Środowisko uruchomieniowe JavaScript do skalowalnych aplikacji backendowych.",
-    "express": "Minimalistyczny framework webowy dla Node.js.",
-    "sql": "Język do pracy z relacyjnymi bazami danych.",
-    "git": "System kontroli wersji. Używany we wszystkich moich projektach i współpracy.",
-    "figma": "Profesjonalne narzędzie do projektowania UI/UX.",
-    "restapi": "Tworzenie i praca z API do łączenia frontendu i backendu.",
-    "fullstack": "Budowanie kompletnych aplikacji webowych od początku do końca.",
-    "webapps": "Tworzenie nowoczesnych, szybkich i responsywnych stron i aplikacji webowych."
-  }
+  "location": "Polska",
+  "openTo": "Otwarty na współpracę",
+  "skills": {
+    "title": "Moje Umiejętności",
+    "frontend": "FRONTEND",
+    "backend": "BACKEND & JĘZYKI",
+    "other": "INNE"
+  },
+  "services": {
+    "title": "Usługi",
+    "heading": "Co potrafię",
+    "subtitle": "Od pomysłu do produkcji — czysty kod, nowoczesny design i solidna architektura.",
+    "items": {
+      "frontend": {
+        "title": "Frontend Development",
+        "desc": "Nowoczesne, szybkie i responsywne interfejsy z React, Next.js i płynnymi animacjami."
+      },
+      "fullstack": {
+        "title": "Aplikacje Full-Stack",
+        "desc": "Kompletne aplikacje webowe z backendem, bazami danych i czystą architekturą API."
+      },
+      "uiux": {
+        "title": "UI / UX Design",
+        "desc": "Czyste interfejsy, przemyślane ścieżki użytkownika i dbałość o każdy detal wizualny."
+      },
+      "performance": {
+        "title": "Optymalizacja",
+        "desc": "Optymalizacja szybkości ładowania, Core Web Vitals i ogólnego doświadczenia użytkownika."
+      },
+      "landing": {
+        "title": "Landing Pages",
+        "desc": "Wysokokonwertujące, wizualnie mocne landing page'e, które wyglądają drogo."
+      },
+      "maintenance": {
+        "title": "Utrzymanie",
+        "desc": "Stałe wsparcie, aktualizacje, poprawki błędów i ulepszenia istniejących projektów."
+      }
+    }
   },
   "projects": {
-    "title": "Moje projekty",
-    "subtitle": "Rzeczy, które zbudowałem"
-  },
+  "title": "Moje projekty",
+  "heading": "Projekty",
+  "subtitle": "Rzeczy, które zbudowałem",
+  "viewAll": "Zobacz wszystko na GitHub",
+  "items": {
+    "alpha": {
+      "type": "OSOBISTY",
+      "title": "Project Alpha",
+      "desc": "Nowoczesna aplikacja webowa z pięknymi animacjami i czystą architekturą."
+    },
+    "beta": {
+      "type": "OSOBISTY",
+      "title": "Project Beta",
+      "desc": "Aplikacja full-stack z funkcjami real-time i pięknym UI."
+    }
+  }
+},
   "contact": {
-    "title": "Zbudujmy Coś Niesamowitego Razem",
+    "title": "Kontakt",
+    "heading": "Napisz do mnie",
     "subtitle": "Masz ekscytujący pomysł lub chcesz porozmawiać o technologii?",
     "emailBtn": "Napisz do mnie"
   },
