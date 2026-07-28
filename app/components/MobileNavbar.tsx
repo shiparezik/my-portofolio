@@ -47,29 +47,50 @@ export default function Navbar({
     return labels[currentLang]?.[key] || labels.en[key] || key;
   };
 
+  // scroll state — через rAF, без лишних setState
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    let ticking = false;
+
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+
+      requestAnimationFrame(() => {
+        setScrolled(window.scrollY > 20);
+        ticking = false;
+      });
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  // active section
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
+
     navItems.forEach((item) => {
       const el = document.getElementById(item.id);
       if (!el) return;
+
       const obs = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) setActiveSection(item.id);
         },
-        { threshold: 0.25 }
+        {
+          threshold: 0.2,
+          rootMargin: '-20% 0px -40% 0px',
+        }
       );
+
       obs.observe(el);
       observers.push(obs);
     });
+
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
+  // lock body scroll when menu open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? 'hidden' : '';
     return () => {
@@ -78,8 +99,19 @@ export default function Navbar({
   }, [mobileOpen]);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    const isMobile = window.innerWidth < 768;
+    document.getElementById(id)?.scrollIntoView({
+      behavior: isMobile ? 'auto' : 'smooth',
+    });
     setMobileOpen(false);
+  };
+
+  const scrollTop = () => {
+    const isMobile = window.innerWidth < 768;
+    window.scrollTo({
+      top: 0,
+      behavior: isMobile ? 'auto' : 'smooth',
+    });
   };
 
   return (
@@ -88,20 +120,17 @@ export default function Navbar({
       <header
         className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${
           scrolled
-            ? 'bg-[#08060d]/95 border-b border-white/10 md:bg-[#08060d]/80 md:backdrop-blur-xl md:border-[#c084fc]/20'
+            ? 'bg-[#08060d] border-b border-white/10 md:bg-[#08060d]/80 md:backdrop-blur-xl md:border-[#c084fc]/20'
             : 'bg-transparent'
         }`}
       >
         <div className="mx-auto flex h-[64px] max-w-6xl items-center justify-between px-5 md:h-[72px]">
           {/* Logo */}
-          <button
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            className="relative flex items-center"
-          >
+          <button onClick={scrollTop} className="relative flex items-center">
             <img
               src="/logo.shiparezik.png"
               alt="shiparezik"
-              className="relative h-11 w-auto object-contain sm:h-12 md:h-14"
+              className="h-11 w-auto object-contain sm:h-12 md:h-14"
               draggable={false}
             />
           </button>
@@ -159,7 +188,11 @@ export default function Navbar({
                 className="flex items-center gap-1.5 rounded-full border border-white/10 bg-white/5 px-3.5 py-2 text-sm"
               >
                 <span className="font-medium">{languageFlags[currentLang]}</span>
-                <ChevronDown className={`h-3.5 w-3.5 text-white/40 transition-transform ${langOpen ? 'rotate-180' : ''}`} />
+                <ChevronDown
+                  className={`h-3.5 w-3.5 text-white/40 transition-transform ${
+                    langOpen ? 'rotate-180' : ''
+                  }`}
+                />
               </button>
 
               <AnimatePresence>
@@ -210,14 +243,14 @@ export default function Navbar({
         </div>
       </header>
 
-      {/* MOBILE MENU — lightweight */}
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.18 }}
+            transition={{ duration: 0.15 }}
             className="fixed inset-0 z-[60] bg-[#08060d] md:hidden"
           >
             <div className="flex h-full flex-col">
@@ -306,4 +339,3 @@ export default function Navbar({
     </>
   );
 }
-

@@ -8,22 +8,6 @@
   }
 }
 
-/* ===== CUSTOM CURSOR ===== */
-@media (pointer: fine) {
-  html.has-custom-cursor,
-  html.has-custom-cursor * {
-    cursor: none !important;
-  }
-
-  html.has-custom-cursor .site-cursor {
-    opacity: 0;
-    transition: opacity 0.12s ease;
-  }
-
-  html.has-custom-cursor:hover .site-cursor {
-    opacity: 1;
-  }
-}
 
 /* ==================== FINAL PROFESSIONAL THEME ==================== */
 :root {

@@ -115,7 +115,7 @@ export default function Navbar({
           >
             <div className="absolute -inset-4 bg-[#c084fc]/25 rounded-full blur-2xl opacity-50 group-hover:opacity-90 transition-opacity duration-500" />
             <img
-              src="/logo.shiparezik.png"
+              src="/logo1.png"
               alt="shiparezik"
               className="relative h-12 sm:h-14 w-auto object-contain
                          drop-shadow-[0_0_22px_rgba(192,132,252,0.85)]
@@ -244,7 +244,7 @@ export default function Navbar({
               {/* Top */}
               <div className="flex items-center justify-between px-6 h-[72px]">
                 <img
-                  src="/logo.shiparezik.png"
+                  src="/logo1.png"
                   alt="shiparezik"
                   className="h-10 w-auto object-contain drop-shadow-[0_0_16px_rgba(192,132,252,0.6)]"
                 />
