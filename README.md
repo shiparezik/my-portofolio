@@ -144,4 +144,3 @@ This project is available for educational and portfolio purposes.
 ⭐ If you like this project, consider giving it a star.
 
 </div>
-````
