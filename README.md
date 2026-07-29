@@ -1,36 +1,148 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+````md
+<div align="center">
 
-## Getting Started
+# ⚡ shiparezik
 
-First, run the development server:
+### Full-Stack Developer Portfolio
+
+Modern, fast and responsive personal portfolio built with **Next.js**, featuring smooth animations, multilingual support and a cyber-inspired UI.
+
+🌐 **Live Demo:** https://shiparezik.vercel.app
+
+</div>
+
+---
+
+## ✨ Overview
+
+This project is my personal portfolio designed to showcase my skills, projects and experience as a developer.
+
+The website focuses on performance, clean architecture and user experience while maintaining a modern dark aesthetic with smooth interactions across all devices.
+
+---
+
+## 🚀 Features
+
+- 🌍 Multi-language support
+  - English
+  - Polski
+  - Українська
+  - Русский
+- 📱 Fully responsive design
+- ⚡ Fast page loading
+- 🎨 Modern dark UI with neon accents
+- ✨ Smooth animations powered by Framer Motion
+- 🖥️ Mobile-first navigation
+- 📂 Projects showcase
+- 💼 Skills & Services sections
+- 📬 Contact section
+- 🔍 SEO-friendly structure
+- 🚀 Optimized for Android Chrome and low-end devices
+
+---
+
+## 🛠 Tech Stack
+
+| Category | Technologies |
+|----------|--------------|
+| Framework | Next.js (App Router) |
+| Language | TypeScript |
+| Styling | Tailwind CSS |
+| Animations | Framer Motion |
+| Icons | Lucide React |
+| Deployment | Vercel |
+
+---
+
+## 📁 Project Structure
+
+```text
+app/
+components/
+messages/
+public/
+```
+
+- **app/** — Pages and layouts
+- **components/** — Reusable UI components
+- **messages/** — Localization files
+- **public/** — Images, icons and static assets
+
+---
+
+## ⚙️ Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/shiparezik/shiparezik.git
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🧩 Development Challenges
 
-To learn more about Next.js, take a look at the following resources:
+During development several real-world issues had to be solved:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- 🌍 Refactored the entire application for multilingual support.
+- 🛠 Fixed runtime errors caused by translation hooks (`t is not a function`).
+- 🔄 Resolved type mismatches between shared component props.
+- 🔤 Replaced CSS font imports with `next/font` for improved performance.
+- 📱 Optimized blur effects and animations for Android Chrome.
+- 🎨 Fixed responsive layout overflow and image hover issues.
+- 🚀 Improved Lighthouse performance and rendering consistency.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📦 Build
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run build
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 🚀 Deployment
+
+The application is deployed using **Vercel**.
+
+Live version:
+
+**https://shiparezik.vercel.app**
+
+---
+
+## 📄 License
+
+This project is available for educational and portfolio purposes.
+
+---
+
+<div align="center">
+
+### Built with ❤️ by shiparezik
+
+🌐 https://shiparezik.vercel.app
+
+⭐ If you like this project, consider giving it a star.
+
+</div>
+````
