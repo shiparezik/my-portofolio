@@ -5,86 +5,119 @@
     "services": "Services",
     "projects": "Projects",
     "contact": "Contact",
-    "projectsBtn": "View Projects"
+    "projectsBtn": "View work"
   },
   "hero": {
     "greeting": "HELLO, I'M",
     "name": "SHIPAREZIK",
-    "role": "Full Stack Developer",
-    "description": "17-year-old passionate developer from Poland crafting beautiful, fast, and modern digital experiences."
+    "role": "Full-Stack Developer",
+    "description": "I design and build polished web products that feel fast, clear and genuinely useful.",
+    "proof": {
+      "endToEnd": "From interface to API",
+      "locales": "4 interface languages",
+      "craft": "Product-minded craft"
+    }
   },
   "about": {
-    "title": "About Me",
-    "heading": "Building digital things that matter.",
-    "p1": "Hi, I'm Danylo, a 17-year-old Software Engineering student in my 4rd year.",
-    "p2": "Started with HTML/CSS, fell in love with JavaScript, React & Next.js, and now building full-stack applications with modern tools.",
-    "p3": "Fast learner, problem-solver, and creative coder who enjoys turning ideas into polished digital products.",
-    "p4": "Programming for me is more than code — it's creativity, continuous growth, and the joy of solving real problems."
+    "title": "About me",
+    "heading": "I build digital products with a point of view.",
+    "p1": "Hi, I'm Danylo — a software engineering student and full-stack developer based in Poland.",
+    "p2": "I started with HTML and CSS, then found my craft in JavaScript, React and Next.js. Today I build complete products, from interface details to APIs and databases.",
+    "p3": "I enjoy the hard parts: turning a vague idea into a sensible flow, keeping the architecture clean and making every interaction feel intentional.",
+    "p4": "For me, programming is equal parts engineering and creativity — a way to keep learning while solving real problems.",
+    "now": "Currently building",
+    "nowDescription": "A focused full-stack workspace for getting work and ideas out of your head."
   },
-  "location": "Poland",
+  "location": "Łódź, Poland",
+  "stack": { "label": "Core stack" },
   "openTo": "Open to opportunities",
   "skills": {
-    "title": "My Skills",
+    "title": "Capabilities",
+    "heading": "Skills & tools",
     "frontend": "FRONTEND",
     "backend": "BACKEND & LANGUAGES",
-    "other": "OTHER"
+    "other": "PRODUCT & TOOLING",
+    "frontendDescription": "Fast, responsive interfaces that are easy to use.",
+    "backendDescription": "Reliable APIs, data models and secure product foundations.",
+    "otherDescription": "Delivery, quality and product thinking from idea to launch."
   },
   "services": {
     "title": "Services",
-    "heading": "What I can do",
-    "subtitle": "From idea to production — clean code, modern design and solid architecture.",
+    "heading": "From a sharp idea to a shipped product.",
+    "subtitle": "Thoughtful design, clean code and an implementation that is ready to grow.",
     "items": {
-      "frontend": {
-        "title": "Frontend Development",
-        "desc": "Modern, fast and responsive interfaces with React, Next.js and smooth animations."
-      },
-      "fullstack": {
-        "title": "Full-Stack Apps",
-        "desc": "Complete web applications with backend, databases and clean API architecture."
-      },
-      "uiux": {
-        "title": "UI / UX Design",
-        "desc": "Clean interfaces, thoughtful user flows and attention to every visual detail."
-      },
-      "performance": {
-        "title": "Performance",
-        "desc": "Optimizing load speed, Core Web Vitals and overall user experience."
-      },
-      "landing": {
-        "title": "Landing Pages",
-        "desc": "High-converting, visually strong landing pages that look expensive."
-      },
-      "maintenance": {
-        "title": "Maintenance",
-        "desc": "Ongoing support, updates, bug fixes and improvements for existing projects."
-      }
+      "frontend": { "title": "Frontend development", "desc": "Responsive React and Next.js interfaces with the small details that make a product feel premium." },
+      "fullstack": { "title": "Full-stack applications", "desc": "End-to-end web products with an API, data layer, authentication and a maintainable foundation." },
+      "uiux": { "title": "UI / UX design", "desc": "Clear flows, strong visual hierarchy and interfaces that make the next action obvious." },
+      "performance": { "title": "Performance", "desc": "Faster loads, healthier Core Web Vitals and fewer obstacles between a visitor and the content." },
+      "landing": { "title": "Landing pages", "desc": "Focused, high-impact pages that explain the value quickly and look memorable." },
+      "maintenance": { "title": "Product care", "desc": "Reliable iterations, fixes and improvements after launch — not just a hand-off." }
     }
   },
-
-"projects": {
-  "title": "My Projects",
-  "heading": "Projects",
-  "subtitle": "Real stuff I built",
-  "viewAll": "View all on GitHub",
-  "items": {
-"alpha": {
-      "type": "PERSONAL",
-      "title": "Project Alpha",
-      "desc": "Modern web application with beautiful animations and clean architecture."
+  "projects": {
+    "title": "Selected work",
+    "heading": "Built to be used.",
+    "subtitle": "Products where UX and engineering meet.",
+    "viewAll": "See GitHub profile",
+    "taskflow": {
+      "eyebrow": "Full-stack project",
+      "status": "Live at taskflow-dev.com",
+      "description": "A full-stack task manager with tasks, rich notes, project spaces and an AI companion. Designed around one focused flow for planning and getting work done.",
+      "public": "Public product by shiparezik",
+      "visit": "Open TaskFlow",
+      "stats": {
+        "locales": "interface languages",
+        "live": "public web app",
+        "workflow": "guided workflows"
+      },
+      "features": {
+        "tasks": { "title": "Tasks & focus", "desc": "Priorities, deadlines, recurrence, subtasks, comments, smart views and a focus timer." },
+        "notes": { "title": "Rich notes", "desc": "Capture ideas with tags, links, images and quotes — then pin, reply or send a note to AI." },
+        "spaces": { "title": "Project spaces", "desc": "Nested spaces keep research, pages, folders and reference links together in their real context." },
+        "ai": { "title": "AI, with control", "desc": "Plans become editable task suggestions; space chat answers from selected project material." },
+        "security": { "title": "Secure by design", "desc": "JWT + refresh cookies, protected routes, email flows and Google / GitHub OAuth." },
+        "experience": { "title": "Made to feel good", "desc": "Responsive desktop and mobile UX, four languages, light/dark modes and personal accent themes." }
+      },
+      "architecture": {
+        "title": "Clear product architecture",
+        "desc": "A dedicated client, API and data layer — built for real production concerns."
+      }
     },
-    "beta": {
-      "type": "PERSONAL",
-      "title": "Project Beta",
-      "desc": "Full-stack application with real-time features and beautiful UI."
+    "signalboard": {
+      "eyebrow": "Future concept · product intelligence",
+      "title": "Signalboard",
+      "description": "A product operations cockpit for startup teams. It brings deploy health, customer feedback, errors and key metrics into one live view, then turns those signals into the next real priorities.",
+      "features": {
+        "pulse": { "title": "Product pulse", "desc": "Releases, application health and feedback in one live signal layer." },
+        "briefing": { "title": "AI daily brief", "desc": "A concise explanation of what changed and what deserves attention." },
+        "decisions": { "title": "Release decisions", "desc": "Priority cards connect code changes, metrics and the customer voice." }
+      }
+    },
+    "portfolio": {
+      "eyebrow": "Personal portfolio",
+      "title": "The portfolio itself",
+      "visit": "Open portfolio",
+      "description": "A fast, accessible multi-language portfolio with a considered dark system, lightweight motion and attention to Core Web Vitals.",
+      "features": {
+        "design": { "title": "Visual system", "desc": "Clear hierarchy, strong contrast and a focused dark theme." },
+        "performance": { "title": "Built to stay fast", "desc": "Optimized images and motion that respects mobile devices." },
+        "locales": { "title": "Four languages", "desc": "English, Polish, Ukrainian and Russian content." }
+      }
+    },
+    "carousel": {
+      "previous": "Previous project",
+      "next": "Next project"
     }
-  }
-}, 
-  
+  },
   "contact": {
     "title": "Contact",
-    "heading": "Get in touch",
-    "subtitle": "Have an exciting idea or just want to chat about tech?",
-    "emailBtn": "Write me"
+    "heading": "Have a good project in mind?",
+    "subtitle": "Tell me what you're building — I’m always up for a great product conversation.",
+    "emailBtn": "Write to me"
   },
-  "footer": "Built with Next.js, Framer Motion & Passion"
+  "footer": "Designed and built with Next.js, Framer Motion & intent",
+  "footerLinks": {
+    "privacy": "Privacy",
+    "terms": "Terms"
+  }
 }

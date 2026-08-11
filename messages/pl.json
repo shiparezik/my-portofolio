@@ -5,84 +5,120 @@
     "services": "Usługi",
     "projects": "Projekty",
     "contact": "Kontakt",
-    "projectsBtn": "Zobacz projekty"
+    "projectsBtn": "Zobacz realizacje"
   },
   "hero": {
     "greeting": "CZEŚĆ, JESTEM",
     "name": "SHIPAREZIK",
-    "role": "Full Stack Developer",
-    "description": "17-letni pasjonat programowania z Polski tworzący piękne, szybkie i nowoczesne doświadczenia cyfrowe."
+    "role": "Full-Stack Developer",
+    "description": "Projektuję i buduję dopracowane produkty webowe — szybkie, czytelne i naprawdę użyteczne.",
+    "proof": {
+      "endToEnd": "Od interfejsu do API",
+      "locales": "4 języki interfejsu",
+      "craft": "Podejście produktowe"
+    }
   },
   "about": {
     "title": "O mnie",
-    "heading": "Tworzę cyfrowe rzeczy, które mają znaczenie.",
-    "p1": "Cześć, jestem Danylo, 17-letni student Inżynierii Oprogramowania na 4. roku.",
-    "p2": "Zacząłem od HTML/CSS, zakochałem się w JavaScript, React & Next.js, a teraz buduję aplikacje full-stack z nowoczesnymi narzędziami.",
-    "p3": "Szybko się uczę, rozwiązywacz problemów i kreatywny koder, który lubi zamieniać pomysły w dopracowane produkty cyfrowe.",
-    "p4": "Programowanie dla mnie to coś więcej niż kod — to kreatywność, ciągły rozwój i radość z rozwiązywania prawdziwych problemów."
+    "heading": "Tworzę cyfrowe produkty z własnym charakterem.",
+    "p1": "Cześć, jestem Danylo — studentem inżynierii oprogramowania i full-stack developerem z Polski.",
+    "p2": "Zacząłem od HTML i CSS, a potem odkryłem JavaScript, React i Next.js. Dziś buduję kompletne produkty: od szczegółów interfejsu po API i bazy danych.",
+    "p3": "Lubię trudniejsze wyzwania: zmieniać luźny pomysł w zrozumiały przepływ, utrzymywać czystą architekturę i sprawiać, że każda interakcja ma sens.",
+    "p4": "Programowanie to dla mnie jednocześnie inżynieria i kreatywność — sposób, żeby stale się rozwijać i rozwiązywać prawdziwe problemy.",
+    "now": "Obecnie tworzę",
+    "nowDescription": "Skupiony workspace full-stack dla zadań, pomysłów i realnego postępu."
   },
   "location": "Polska",
+  "stack": { "label": "Główny stack" },
   "openTo": "Otwarty na współpracę",
   "skills": {
-    "title": "Moje Umiejętności",
+    "title": "Kompetencje",
+    "heading": "Umiejętności i narzędzia",
     "frontend": "FRONTEND",
-    "backend": "BACKEND & JĘZYKI",
-    "other": "INNE"
+    "backend": "BACKEND I JĘZYKI",
+    "other": "PRODUKT I NARZĘDZIA",
+    "frontendDescription": "Szybkie, responsywne interfejsy, z których wygodnie się korzysta.",
+    "backendDescription": "Stabilne API, modele danych i bezpieczne podstawy produktu.",
+    "otherDescription": "Delivery, jakość i myślenie produktowe — od pomysłu do startu."
   },
   "services": {
     "title": "Usługi",
-    "heading": "Co potrafię",
-    "subtitle": "Od pomysłu do produkcji — czysty kod, nowoczesny design i solidna architektura.",
+    "heading": "Od dobrego pomysłu do gotowego produktu.",
+    "subtitle": "Przemyślany design, czysty kod i rozwiązanie gotowe do dalszego rozwoju.",
     "items": {
-      "frontend": {
-        "title": "Frontend Development",
-        "desc": "Nowoczesne, szybkie i responsywne interfejsy z React, Next.js i płynnymi animacjami."
-      },
-      "fullstack": {
-        "title": "Aplikacje Full-Stack",
-        "desc": "Kompletne aplikacje webowe z backendem, bazami danych i czystą architekturą API."
-      },
-      "uiux": {
-        "title": "UI / UX Design",
-        "desc": "Czyste interfejsy, przemyślane ścieżki użytkownika i dbałość o każdy detal wizualny."
-      },
-      "performance": {
-        "title": "Optymalizacja",
-        "desc": "Optymalizacja szybkości ładowania, Core Web Vitals i ogólnego doświadczenia użytkownika."
-      },
-      "landing": {
-        "title": "Landing Pages",
-        "desc": "Wysokokonwertujące, wizualnie mocne landing page'e, które wyglądają drogo."
-      },
-      "maintenance": {
-        "title": "Utrzymanie",
-        "desc": "Stałe wsparcie, aktualizacje, poprawki błędów i ulepszenia istniejących projektów."
-      }
+      "frontend": { "title": "Frontend development", "desc": "Responsywne interfejsy React i Next.js z detalami, które sprawiają, że produkt wydaje się premium." },
+      "fullstack": { "title": "Aplikacje full-stack", "desc": "Kompletne produkty webowe z API, warstwą danych, uwierzytelnianiem i solidną podstawą." },
+      "uiux": { "title": "UI / UX design", "desc": "Czytelne ścieżki, dobra hierarchia wizualna i interfejsy, w których kolejny krok jest oczywisty." },
+      "performance": { "title": "Wydajność", "desc": "Szybsze ładowanie, lepsze Core Web Vitals i mniej przeszkód między użytkownikiem a treścią." },
+      "landing": { "title": "Landing pages", "desc": "Skupione, mocne strony, które szybko pokazują wartość i zostają w pamięci." },
+      "maintenance": { "title": "Rozwój produktu", "desc": "Pewne iteracje, poprawki i ulepszenia po starcie — nie tylko przekazanie projektu." }
     }
   },
   "projects": {
-  "title": "Moje projekty",
-  "heading": "Projekty",
-  "subtitle": "Rzeczy, które zbudowałem",
-  "viewAll": "Zobacz wszystko na GitHub",
-  "items": {
-    "alpha": {
-      "type": "OSOBISTY",
-      "title": "Project Alpha",
-      "desc": "Nowoczesna aplikacja webowa z pięknymi animacjami i czystą architekturą."
+    "title": "Wybrane realizacje",
+    "heading": "Stworzone, żeby z nich korzystać.",
+    "subtitle": "Produkty na styku UX i inżynierii.",
+    "viewAll": "Zobacz profil GitHub",
+    "taskflow": {
+      "eyebrow": "Projekt full-stack",
+      "status": "Działa na taskflow-dev.com",
+      "description": "Aplikacja full-stack do zarządzania zadaniami z rozbudowanymi notatkami, przestrzeniami projektowymi i asystentem AI. Zbudowana wokół jednego skupionego procesu planowania i działania.",
+      "public": "Publiczny produkt by shiparezik",
+      "visit": "Otwórz TaskFlow",
+      "stats": {
+        "locales": "języki interfejsu",
+        "live": "publiczna aplikacja webowa",
+        "workflow": "inteligentne procesy"
+      },
+      "features": {
+        "tasks": { "title": "Zadania i skupienie", "desc": "Priorytety, terminy, powtarzalność, podzadania, komentarze, widoki i focus timer." },
+        "notes": { "title": "Rozbudowane notatki", "desc": "Zapisuj pomysły z tagami, linkami, obrazami i cytatami; przypinaj je, komentuj lub wysyłaj do AI." },
+        "spaces": { "title": "Przestrzenie projektów", "desc": "Zagnieżdżone przestrzenie trzymają research, strony, foldery i linki w prawdziwym kontekście." },
+        "ai": { "title": "AI pod kontrolą", "desc": "Plany stają się edytowalnymi propozycjami zadań, a czat korzysta z wybranej przestrzeni." },
+        "security": { "title": "Bezpieczeństwo", "desc": "JWT i refresh cookies, chronione trasy, przepływy e-mail oraz Google / GitHub OAuth." },
+        "experience": { "title": "Dopracowane doświadczenie", "desc": "Responsywny UX na desktopie i telefonie, cztery języki, jasny/ciemny motyw i akcenty kolorystyczne." }
+      },
+      "architecture": {
+        "title": "Czytelna architektura produktu",
+        "desc": "Osobny klient, API i warstwa danych — z uwzględnieniem realnych wymagań produkcyjnych."
+      }
     },
-    "beta": {
-      "type": "OSOBISTY",
-      "title": "Project Beta",
-      "desc": "Aplikacja full-stack z funkcjami real-time i pięknym UI."
+    "signalboard": {
+      "eyebrow": "Koncepcja na przyszłość · product intelligence",
+      "title": "Signalboard",
+      "description": "Centrum operacyjne produktu dla zespołów startupowych. Łączy zdrowie wdrożeń, feedback klientów, błędy i najważniejsze metryki w jednym widoku, a potem zamienia te sygnały w realne priorytety.",
+      "features": {
+        "pulse": { "title": "Puls produktu", "desc": "Wydania, zdrowie aplikacji i feedback w jednej warstwie sygnałów." },
+        "briefing": { "title": "Codzienny brief AI", "desc": "Krótkie wyjaśnienie, co się zmieniło i co wymaga uwagi." },
+        "decisions": { "title": "Decyzje do release’u", "desc": "Karty priorytetów łączą zmiany w kodzie, metryki i głos klientów." }
+      }
+    },
+    "portfolio": {
+      "eyebrow": "Portfolio osobiste",
+      "title": "To portfolio",
+      "visit": "Otwórz portfolio",
+      "description": "Szybkie, dostępne portfolio w czterech językach — ze spójnym ciemnym systemem, lekkim ruchem i dbałością o Core Web Vitals.",
+      "features": {
+        "design": { "title": "System wizualny", "desc": "Czytelna hierarchia, mocny kontrast i skupiony ciemny motyw." },
+        "performance": { "title": "Zbudowane, by działać szybko", "desc": "Zoptymalizowane obrazy i ruch szanujący urządzenia mobilne." },
+        "locales": { "title": "Cztery języki", "desc": "Treści po angielsku, polsku, ukraińsku i rosyjsku." }
+      }
+    },
+    "carousel": {
+      "previous": "Poprzedni projekt",
+      "next": "Następny projekt"
     }
-  }
-},
+  },
   "contact": {
     "title": "Kontakt",
-    "heading": "Napisz do mnie",
-    "subtitle": "Masz ekscytujący pomysł lub chcesz porozmawiać o technologii?",
+    "heading": "Masz ciekawy projekt?",
+    "subtitle": "Opowiedz, co budujesz — zawsze chętnie porozmawiam o dobrym produkcie.",
     "emailBtn": "Napisz do mnie"
   },
-  "footer": "Zbudowano z Next.js, Framer Motion & Pasji"
+  "footer": "Zaprojektowane i zbudowane w Next.js, Framer Motion oraz z dbałością o detale"
+,
+  "footerLinks": {
+    "privacy": "Prywatność",
+    "terms": "Warunki"
+  }
 }

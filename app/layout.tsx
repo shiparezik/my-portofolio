@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Optimize from './components/Optimize';
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -16,8 +15,13 @@ const grotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "shiparezik | portfolio",
-  description: "17 y.o. Full Stack Developer from Poland. React, Next.js, C#, Python.",
+  title: "Danylo Shypotko — Full-Stack Developer",
+  description: "Portfolio of Danylo Shypotko: thoughtful full-stack products with React, Next.js, TypeScript and Node.js.",
+  applicationName: "Danylo Shypotko Portfolio",
+  keywords: ["Danylo Shypotko", "shiparezik", "Full-Stack Developer", "Next.js", "React", "TypeScript"],
+  authors: [{ name: "Danylo Shypotko" }],
+  creator: "Danylo Shypotko",
+  robots: { index: true, follow: true },
   icons: { icon: "/icon.ico" },
 };
 

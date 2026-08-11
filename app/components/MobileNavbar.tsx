@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -127,9 +128,12 @@ export default function Navbar({
         <div className="mx-auto flex h-[64px] max-w-6xl items-center justify-between px-5 md:h-[72px]">
           {/* Logo */}
           <button onClick={scrollTop} className="relative flex items-center">
-            <img
+            <Image
               src="/logo.shiparezik.png"
               alt="shiparezik"
+              width={1536}
+              height={1024}
+              sizes="(max-width: 640px) 44px, (max-width: 768px) 48px, 56px"
               className="h-11 w-auto object-contain sm:h-12 md:h-14"
               draggable={false}
             />
@@ -169,15 +173,15 @@ export default function Navbar({
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5"
               >
-                <img src="/icons/github.svg" alt="GitHub" className="h-4 w-4 invert opacity-70" />
+                <Image src="/icons/github.svg" alt="GitHub" width={16} height={16} className="h-4 w-4 invert opacity-70" />
               </a>
               <a
-                href="https://www.linkedin.com/in/danylo-shypotko-85924a33a/"
+                href="https://www.linkedin.com/in/danylo-shypotko"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex h-9 w-9 items-center justify-center rounded-xl border border-white/10 bg-white/5"
               >
-                <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-4 w-4 invert opacity-70" />
+                <Image src="/icons/linkedin.svg" alt="LinkedIn" width={16} height={16} className="h-4 w-4 invert opacity-70" />
               </a>
             </div>
 
@@ -256,9 +260,12 @@ export default function Navbar({
             <div className="flex h-full flex-col">
               {/* Top */}
               <div className="flex h-[64px] items-center justify-between px-5">
-                <img
+                <Image
                   src="/logo.shiparezik.png"
                   alt="shiparezik"
+                  width={1536}
+                  height={1024}
+                  sizes="40px"
                   className="h-10 w-auto object-contain"
                   draggable={false}
                 />
@@ -298,21 +305,21 @@ export default function Navbar({
                     rel="noopener noreferrer"
                     className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"
                   >
-                    <img src="/icons/github.svg" alt="GitHub" className="h-5 w-5 invert opacity-75" />
+                    <Image src="/icons/github.svg" alt="GitHub" width={20} height={20} className="h-5 w-5 invert opacity-75" />
                   </a>
                   <a
-                    href="https://www.linkedin.com/in/danylo-shypotko-85924a33a/"
+                    href="https://www.linkedin.com/in/danylo-shypotko"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"
                   >
-                    <img src="/icons/linkedin.svg" alt="LinkedIn" className="h-5 w-5 invert opacity-75" />
+                    <Image src="/icons/linkedin.svg" alt="LinkedIn" width={20} height={20} className="h-5 w-5 invert opacity-75" />
                   </a>
                   <a
-                    href="mailto:danilsipatko@gmail.com"
+                    href="mailto:shipareziki@gmail.com"
                     className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/5"
                   >
-                    <img src="/icons/mail.svg" alt="Email" className="h-5 w-5 invert opacity-75" />
+                    <Image src="/icons/mail.svg" alt="Email" width={20} height={20} className="h-5 w-5 invert opacity-75" />
                   </a>
                 </div>
 
