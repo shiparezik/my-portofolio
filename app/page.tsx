@@ -156,8 +156,6 @@ export default function Portfolio() {
       icon: CheckCircle2,
       color: '#c4b5fd',
       image: '/taskflow-dashboard.png',
-      href: 'https://taskflow-dev.com',
-      linkLabel: t('projects.taskflow.visit'),
       visualHref: 'https://taskflow-dev.com',
       visualLabel: t('projects.taskflow.visit'),
       stack: ['Next.js 15', 'Express', 'Prisma', 'PostgreSQL', 'OpenAI / Groq'],
@@ -169,8 +167,6 @@ export default function Portfolio() {
       icon: Gauge,
       color: '#67e8f9',
       image: undefined,
-      href: undefined,
-      linkLabel: undefined,
       visualHref: undefined,
       visualLabel: undefined,
       stack: ['Next.js', 'Node.js', 'Webhooks', 'PostgreSQL', 'AI workflows'],
@@ -182,8 +178,6 @@ export default function Portfolio() {
       icon: MonitorSmartphone,
       color: '#f9a8d4',
       image: '/portfolio-preview.png',
-      href: undefined,
-      linkLabel: undefined,
       visualHref: '/',
       visualLabel: t('projects.portfolio.visit'),
       stack: ['Next.js', 'i18n', 'SEO', 'A11y', 'Framer Motion'],
@@ -658,17 +652,12 @@ export default function Portfolio() {
                   ))}
                 </div>
 
-                <div className="mt-auto flex flex-wrap items-center gap-x-5 gap-y-3">
+                <div className="mt-auto">
                   <div className="flex flex-wrap gap-2">
                     {activeProject.stack.map((tech) => (
                       <span key={tech} className="rounded-full border border-white/10 bg-white/[0.035] px-3 py-1.5 text-[11px] font-medium text-white/65">{tech}</span>
                     ))}
                   </div>
-                  {activeProject.href && activeProject.linkLabel && (
-                    <a href={activeProject.href} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-sm font-medium text-cyan-200 transition hover:text-white">
-                      {activeProject.linkLabel} <ArrowUpRight className="h-4 w-4" />
-                    </a>
-                  )}
                 </div>
               </div>
 
