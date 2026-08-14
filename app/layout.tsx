@@ -15,6 +15,7 @@ const grotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://www.shiparezikportfolio.com'),
   title: "Danylo Shypotko — Full-Stack Developer",
   description: "Portfolio of Danylo Shypotko: thoughtful full-stack products with React, Next.js, TypeScript and Node.js.",
   applicationName: "Danylo Shypotko Portfolio",
@@ -22,7 +23,11 @@ export const metadata: Metadata = {
   authors: [{ name: "Danylo Shypotko" }],
   creator: "Danylo Shypotko",
   robots: { index: true, follow: true },
-  icons: { icon: "/icon.ico" },
+  alternates: { canonical: '/' },
+  icons: {
+    icon: [{ url: '/favicon.svg', type: 'image/svg+xml' }],
+    shortcut: ['/favicon.svg'],
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
